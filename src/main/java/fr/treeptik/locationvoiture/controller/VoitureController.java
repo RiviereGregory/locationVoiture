@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import fr.treeptik.locationvoiture.exception.ServiceException;
+import fr.treeptik.locationvoiture.model.Reservation;
 import fr.treeptik.locationvoiture.model.Voiture;
+import fr.treeptik.locationvoiture.service.ReservationService;
 import fr.treeptik.locationvoiture.service.VoitureService;
 import fr.treeptik.locationvoiture.validator.VoitureValidator;
 
@@ -27,6 +29,30 @@ public class VoitureController {
 
 	@Autowired
 	private VoitureValidator validator;
+
+	@Autowired
+	private ReservationService reservationService;
+
+	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
+	public ModelAndView intiReserv() {
+
+		Reservation reservation = new Reservation();
+
+		ModelAndView modelAndView = new ModelAndView("saisie-reservation", "reservation",
+				reservation);
+
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = "/reservation.do", method = RequestMethod.POST)
+	public ModelAndView saisieReservation(Reservation reservation) {
+
+		System.out.println("reservation date  : " + reservation);
+
+		return new ModelAndView("saisie-reservation", "reservation", reservation);
+
+	}
 
 	// // Pour l'appeler dans une servlet
 	// // ici on sera dans localhost:8080/location-voiture/hello

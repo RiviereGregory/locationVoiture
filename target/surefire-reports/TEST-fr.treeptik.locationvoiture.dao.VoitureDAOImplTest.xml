@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.098" errors="0" skipped="3" tests="4" name="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest">
+<testsuite failures="0" time="0.077" errors="0" skipped="3" tests="4" name="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64"/>
@@ -24,7 +24,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/stagiaire/Formation/initJava/Workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf3939742708919243091.tmp"/>
+    <property name="classworlds.conf" value="/home/stagiaire/Formation/initJava/Workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf8396129116361231582.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64:/usr/lib/jvm/java-7-openjdk-amd64/jre/../lib/amd64:/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64/server:/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64:/usr/lib/jvm/java-6-openjdk-amd64/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,14 +61,14 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testremote">
+  <testcase time="0.001" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testremote">
     <skipped/>
   </testcase>
-  <testcase time="0" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testSave">
+  <testcase time="0.001" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testSave">
     <skipped/>
   </testcase>
-  <testcase time="0.049" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testFindById"/>
-  <testcase time="0.049" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testfindall">
+  <testcase time="0.037" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testFindById"/>
+  <testcase time="0.038" classname="fr.treeptik.locationvoiture.dao.VoitureDAOImplTest" name="testfindall">
     <skipped/>
   </testcase>
 </testsuite>

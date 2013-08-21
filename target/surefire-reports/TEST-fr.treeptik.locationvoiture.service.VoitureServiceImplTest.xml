@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="2.883" errors="0" skipped="0" tests="4" name="fr.treeptik.locationvoiture.service.VoitureServiceImplTest">
+<testsuite failures="0" time="3.272" errors="0" skipped="0" tests="4" name="fr.treeptik.locationvoiture.service.VoitureServiceImplTest">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64"/>
@@ -24,7 +24,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
-    <property name="classworlds.conf" value="/home/stagiaire/Formation/initJava/Workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf3939742708919243091.tmp"/>
+    <property name="classworlds.conf" value="/home/stagiaire/Formation/initJava/Workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf8396129116361231582.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64:/usr/lib/jvm/java-7-openjdk-amd64/jre/../lib/amd64:/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64/server:/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64:/usr/lib/jvm/java-6-openjdk-amd64/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,8 +61,8 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="2.819" classname="fr.treeptik.locationvoiture.service.VoitureServiceImplTest" name="testremote"/>
-  <testcase time="0.01" classname="fr.treeptik.locationvoiture.service.VoitureServiceImplTest" name="testSave"/>
+  <testcase time="3.201" classname="fr.treeptik.locationvoiture.service.VoitureServiceImplTest" name="testremote"/>
+  <testcase time="0.016" classname="fr.treeptik.locationvoiture.service.VoitureServiceImplTest" name="testSave"/>
   <testcase time="0.022" classname="fr.treeptik.locationvoiture.service.VoitureServiceImplTest" name="testFindById"/>
-  <testcase time="0.032" classname="fr.treeptik.locationvoiture.service.VoitureServiceImplTest" name="testfindall"/>
+  <testcase time="0.033" classname="fr.treeptik.locationvoiture.service.VoitureServiceImplTest" name="testfindall"/>
 </testsuite>

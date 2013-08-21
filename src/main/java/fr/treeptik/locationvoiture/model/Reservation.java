@@ -30,7 +30,7 @@ public class Reservation implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dateResevation;
+	private Date dateReservation;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -43,13 +43,13 @@ public class Reservation implements Serializable {
 	public Reservation() {
 	}
 
-	public Reservation(Integer id, Client client, Voiture voiture, Date dateResevation,
+	public Reservation(Integer id, Client client, Voiture voiture, Date dateReservation,
 			Date datePriseVehicule, Date dateRetour) {
 		super();
 		this.id = id;
 		this.client = client;
 		this.voiture = voiture;
-		this.dateResevation = dateResevation;
+		this.dateReservation = dateReservation;
 		this.datePriseVehicule = datePriseVehicule;
 		this.dateRetour = dateRetour;
 	}
@@ -57,8 +57,8 @@ public class Reservation implements Serializable {
 	@Override
 	public String toString() {
 		return "Reservation [id=" + id + ", client=" + client + ", voiture=" + voiture
-				+ ", dateResevation=" + dateResevation + ", datePriseVehicule=" + datePriseVehicule
-				+ ", dateRetour=" + dateRetour + "]";
+				+ ", dateResevation=" + dateReservation + ", datePriseVehicule="
+				+ datePriseVehicule + ", dateRetour=" + dateRetour + "]";
 	}
 
 	@Override
@@ -110,12 +110,12 @@ public class Reservation implements Serializable {
 		this.voiture = voiture;
 	}
 
-	public Date getDateResevation() {
-		return dateResevation;
+	public Date getDateReservation() {
+		return dateReservation;
 	}
 
-	public void setDateResevation(Date dateResevation) {
-		this.dateResevation = dateResevation;
+	public void setDateReservation(Date dateReservation) {
+		this.dateReservation = dateReservation;
 	}
 
 	public Date getDatePriseVehicule() {

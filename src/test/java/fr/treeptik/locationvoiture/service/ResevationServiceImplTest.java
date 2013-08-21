@@ -36,7 +36,7 @@ public class ResevationServiceImplTest {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 			reservation.setDatePriseVehicule(dateFormat.parse("20/12/2012"));
-			reservation.setDateResevation(dateFormat.parse("19/12/2012"));
+			reservation.setDateReservation(dateFormat.parse("19/12/2012"));
 			reservation.setDateRetour(dateFormat.parse("24/12/2012"));
 
 			reservationService.save(reservation);
@@ -55,19 +55,19 @@ public class ResevationServiceImplTest {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 			reservation.setDatePriseVehicule(dateFormat.parse("20/12/2012"));
-			reservation.setDateResevation(dateFormat.parse("19/12/2012"));
+			reservation.setDateReservation(dateFormat.parse("19/12/2012"));
 			reservation.setDateRetour(dateFormat.parse("24/12/2012"));
 			reservationService.save(reservation);
 
 			reservation = new Reservation();
 			reservation.setDatePriseVehicule(dateFormat.parse("20/07/2013"));
-			reservation.setDateResevation(dateFormat.parse("15/06/2013"));
+			reservation.setDateReservation(dateFormat.parse("15/06/2013"));
 			reservation.setDateRetour(dateFormat.parse("25/07/2013"));
 			reservationService.save(reservation);
 
 			reservation = new Reservation();
 			reservation.setDatePriseVehicule(dateFormat.parse("20/06/2013"));
-			reservation.setDateResevation(dateFormat.parse("15/05/2013"));
+			reservation.setDateReservation(dateFormat.parse("15/05/2013"));
 			reservation.setDateRetour(dateFormat.parse("24/06/2013"));
 			reservationService.save(reservation);
 
