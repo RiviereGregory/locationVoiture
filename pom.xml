@@ -10,6 +10,7 @@
 	<properties>
 		<version.java>1.7</version.java>
 		<hibernate.version>4.2.3.Final</hibernate.version>
+		<hibernate.validator>5.0.1.Final</hibernate.validator>
 		<spring.version>3.2.3.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
 		<dbcp.version>1.4</dbcp.version>
@@ -80,6 +81,12 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
+		</dependency>
+		<!-- Pour pouvoir mettre de annotaion de validation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator}</version>
 		</dependency>
 
 		<dependency>

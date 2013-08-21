@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "VOITURE")
@@ -19,9 +23,14 @@ public class Voiture implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_voiture")
 	private Integer id;
+
 	@Column(name = "marque_voiture")
+	@NotEmpty
 	private String marque;
+
 	@Column(name = "modele_voiture")
+	@NotBlank
+	@Size(min = 2, max = 10)
 	private String modele;
 
 	public Voiture() {

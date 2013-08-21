@@ -3,8 +3,11 @@ package fr.treeptik.locationvoiture.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,7 +57,15 @@ public class VoitureController {
 	}
 
 	@RequestMapping(value = "/voitures.do", method = RequestMethod.POST)
-	public ModelAndView saveVoitures(Voiture voiture) {
+	// @valid permet de valider l'objet s'il y a des erreurs elles sont mise dans l'objet errors de
+	// type BindingResult
+	public ModelAndView saveVoitures(@Valid Voiture voiture, BindingResult errors) {
+
+		if (errors.hasErrors()) {
+			return new ModelAndView("saisie-voiture", "voiture", voiture);
+
+		}
+
 		try {
 			voitureService.save(voiture);
 		} catch (ServiceException e) {
