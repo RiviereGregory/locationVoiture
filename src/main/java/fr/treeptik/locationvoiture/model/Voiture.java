@@ -25,12 +25,13 @@ public class Voiture implements Serializable {
 	private Integer id;
 
 	@Column(name = "marque_voiture")
-	@NotEmpty
+	// on redefinit le message que l'on affiche avec message
+	@NotEmpty(message = "Saisir une marque")
 	private String marque;
 
 	@Column(name = "modele_voiture")
 	@NotBlank
-	@Size(min = 2, max = 10)
+	@Size(min = 2, max = 10, message = "Erreur modele doit etre entre 2 et 10")
 	private String modele;
 
 	public Voiture() {

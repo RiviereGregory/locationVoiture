@@ -48,6 +48,13 @@
 			</bean>
 		</property>
 	</bean>
+
+	<!-- pour gerer les messages du hibernate validator dans un properties -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
 	<!-- Pour gérer les transaction avec spring -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:entityManagerFactory-ref="entityManagerFactory" />
