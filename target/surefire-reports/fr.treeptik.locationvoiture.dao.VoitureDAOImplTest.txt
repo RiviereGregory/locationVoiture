@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: fr.treeptik.locationvoiture.dao.VoitureDAOImplTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.054 sec
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.05 sec

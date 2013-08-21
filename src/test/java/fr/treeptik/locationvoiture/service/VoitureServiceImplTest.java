@@ -30,7 +30,9 @@ public class VoitureServiceImplTest {
 	@Transactional
 	public void testSave() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 
 			voitureService.save(voiture);
 		} catch (ServiceException e) {
@@ -43,15 +45,25 @@ public class VoitureServiceImplTest {
 	@Transactional
 	public void testfindall() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 			voitureService.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "206");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("206");
 			voitureService.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "305");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("305");
 			voitureService.save(voiture);
-			voiture = new Voiture(null, "Renault", "clio");
+			voiture = new Voiture();
+			voiture.setMarque("Renault");
+			voiture.setModele("clio");
 			voitureService.save(voiture);
-			voiture = new Voiture(null, "Citroen", "c2");
+			voiture = new Voiture();
+			voiture.setMarque("Citroen");
+			voiture.setModele("c2");
 			voitureService.save(voiture);
 
 			List<Voiture> list = voitureService.findAll();
@@ -70,9 +82,13 @@ public class VoitureServiceImplTest {
 	@Transactional
 	public void testremote() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 			voitureService.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "206");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("206");
 			voitureService.save(voiture);
 			List<Voiture> list = voitureService.findAll();
 			for (Voiture voiture2 : list) {
@@ -97,13 +113,17 @@ public class VoitureServiceImplTest {
 	@Transactional
 	public void testFindById() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 			voitureService.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "206");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("206");
 			voitureService.save(voiture);
 			voitureService.findAll();
 
-			Voiture voiture2 = voitureService.findVoiture(voiture.getId());
+			Voiture voiture2 = voitureService.findById(voiture.getId());
 
 			System.out.println(voiture2);
 			System.out.println("");

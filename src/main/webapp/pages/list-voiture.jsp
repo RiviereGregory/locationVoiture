@@ -29,6 +29,7 @@
 				<th>ID</th>
 				<th>Marque</th>
 				<th>Modele</th>
+				<th>Date mise en circulation</th>
 				<th colspan="2">Action</th>
 			</tr>
 
@@ -38,6 +39,7 @@
 					<td>${v.id}</td>
 					<td>${v.marque}</td>
 					<td>${v.modele}</td>
+					<td>${v.dateMiseEnCirculation}</td>
 					<td><a href="modifier-voiture.do?id=${v.id}">Modifier </a></td>
 					<td><a href="supprimer-voiture.do?id=${v.id}">Supprimer </a></td>
 

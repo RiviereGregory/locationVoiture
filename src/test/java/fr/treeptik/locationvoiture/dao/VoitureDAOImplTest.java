@@ -26,7 +26,9 @@ public class VoitureDAOImplTest {
 	@Transactional
 	public void testSave() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 
 			voitureDAO.save(voiture);
 		} catch (DAOException e) {
@@ -40,15 +42,25 @@ public class VoitureDAOImplTest {
 	@Transactional
 	public void testfindall() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 			voitureDAO.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "206");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("206");
 			voitureDAO.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "305");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("305");
 			voitureDAO.save(voiture);
-			voiture = new Voiture(null, "Renault", "clio");
+			voiture = new Voiture();
+			voiture.setMarque("Renault");
+			voiture.setModele("clio");
 			voitureDAO.save(voiture);
-			voiture = new Voiture(null, "Citroen", "c2");
+			voiture = new Voiture();
+			voiture.setMarque("Citroen");
+			voiture.setModele("c2");
 			voitureDAO.save(voiture);
 
 			List<Voiture> list = voitureDAO.findAll();
@@ -68,9 +80,13 @@ public class VoitureDAOImplTest {
 	@Transactional
 	public void testremote() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 			voitureDAO.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "206");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("206");
 			voitureDAO.save(voiture);
 			List<Voiture> list = voitureDAO.findAll();
 			for (Voiture voiture2 : list) {
@@ -95,13 +111,17 @@ public class VoitureDAOImplTest {
 	@Transactional
 	public void testFindById() {
 		try {
-			Voiture voiture = new Voiture(null, "Peugeot", "205");
+			Voiture voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("205");
 			voitureDAO.save(voiture);
-			voiture = new Voiture(null, "Peugeot", "206");
+			voiture = new Voiture();
+			voiture.setMarque("Peugeot");
+			voiture.setModele("206");
 			voitureDAO.save(voiture);
 			voitureDAO.findAll();
 
-			Voiture voiture2 = voitureDAO.findVoiture(voiture.getId());
+			Voiture voiture2 = voitureDAO.findById(voiture.getId());
 
 			System.out.println(voiture2);
 			System.out.println("");

@@ -26,6 +26,7 @@
 	<!--  action page sur laquelle il va lorsque l'on appui sur valider -->
 	<form:form action="voitures.do" commandName="voiture" method="POST">
 
+		
 		<!-- 		Pour recuperer la variable id dans voiture -->
 		<form:hidden path="id" />
 		<table>
@@ -37,6 +38,10 @@
 				<td>Modele :</td>
 				<td><form:input path="modele" /> <form:errors path="modele" /></td>
 			</tr>
+						<tr>
+							<td>Date :</td>
+							<td><form:input path="dateMiseEnCirculation" /> <form:errors path="dateMiseEnCirculation" /></td> 
+						</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Valider" /></td>
 			</tr>

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Voiture;
 import fr.treeptik.locationvoiture.service.VoitureService;
+import fr.treeptik.locationvoiture.validator.VoitureValidator;
 
 // Annotation pour dire que l'on utilise un controleur
 @Controller
@@ -23,6 +24,9 @@ public class VoitureController {
 
 	@Autowired
 	private VoitureService voitureService;
+
+	@Autowired
+	private VoitureValidator validator;
 
 	// // Pour l'appeler dans une servlet
 	// // ici on sera dans localhost:8080/location-voiture/hello
@@ -60,6 +64,8 @@ public class VoitureController {
 	// @valid permet de valider l'objet s'il y a des erreurs elles sont mise dans l'objet errors de
 	// type BindingResult
 	public ModelAndView saveVoitures(@Valid Voiture voiture, BindingResult errors) {
+
+		validator.validate(voiture, errors);
 
 		if (errors.hasErrors()) {
 			return new ModelAndView("saisie-voiture", "voiture", voiture);
@@ -111,7 +117,7 @@ public class VoitureController {
 	public ModelAndView updateVoiture(@RequestParam("id") Integer id) {
 		Voiture v = null;
 		try {
-			v = voitureService.findVoiture(id);
+			v = voitureService.findById(id);
 
 		} catch (ServiceException e) {
 			e.printStackTrace();
