@@ -27,6 +27,10 @@
 	<c:if test="${not empty voitures}">
 		<h1 align="center">liste des voitures</h1>
 		<br />
+		<p align="center">
+			<font color=red>${erreurVoitureReservation}</font>
+		</p>
+		<br />
 		<table border="2" align="center">
 			<tr>
 				<th>ID</th>

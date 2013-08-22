@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Client;
 import fr.treeptik.locationvoiture.service.ClientService;
+import fr.treeptik.locationvoiture.service.ReservationService;
 import fr.treeptik.locationvoiture.validator.ClientValidator;
 
 @Controller
@@ -23,6 +24,8 @@ public class ClientController {
 
 	@Autowired
 	private ClientService clientService;
+	@Autowired
+	private ReservationService reservationService;
 	@Autowired
 	private ClientValidator validator;
 
@@ -112,10 +115,19 @@ public class ClientController {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
-			clientService.removeById(id);
+			if (reservationService.findByClient(id).isEmpty()) {
+
+				clientService.removeById(id);
+
+			} else {
+				params.put("erreurClientReservation", "Le client a une réservation");
+			}
+
 			params.put("clients", clientService.findAll());
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
+			System.out.println("Impossible effacer");
 		}
 		return new ModelAndView("list-client", params);
 

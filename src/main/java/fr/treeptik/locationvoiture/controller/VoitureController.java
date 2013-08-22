@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Voiture;
+import fr.treeptik.locationvoiture.service.ReservationService;
 import fr.treeptik.locationvoiture.service.VoitureService;
 import fr.treeptik.locationvoiture.validator.VoitureValidator;
 
@@ -24,6 +25,8 @@ public class VoitureController {
 
 	@Autowired
 	private VoitureService voitureService;
+	@Autowired
+	private ReservationService reservationService;
 
 	@Autowired
 	private VoitureValidator validator;
@@ -136,7 +139,14 @@ public class VoitureController {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
-			voitureService.removeById(id);
+			if (reservationService.findByVoiture(id).isEmpty()) {
+
+				voitureService.removeById(id);
+
+			} else {
+				params.put("erreurVoitureReservation", "La Voiture est réservée");
+			}
+
 			params.put("voitures", voitureService.findAll());
 		} catch (ServiceException e) {
 			e.printStackTrace();
