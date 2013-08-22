@@ -32,15 +32,18 @@
 		<table>
 			<tr>
 				<td>Nom :</td>
-				<td><form:input path="nom" /></td>
+				<td><form:input path="nom" />
+					<form:errors path="nom" /></td>
 			</tr>
 			<tr>
 				<td>Prenom :</td>
-				<td><form:input path="prenom" /></td>
+				<td><form:input path="prenom" />
+					<form:errors path="prenom" /></td>
 			</tr>
 			<tr>
 				<td>Email :</td>
-				<td><form:input path="mail" /></td>
+				<td><form:input path="mail" />
+					<form:errors path="mail" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Valider" /></td>
