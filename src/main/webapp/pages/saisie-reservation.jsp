@@ -55,15 +55,18 @@
 			</tr>
 			<tr>
 				<td>Date de resevation :</td>
-				<td><form:input path="dateReservation" /></td>
+				<td><form:input path="dateReservation" /> <form:errors
+						path="dateReservation" /></td>
 			</tr>
 			<tr>
 				<td>Date de prise du vehicule :</td>
-				<td><form:input path="datePriseVehicule" /></td>
+				<td><form:input path="datePriseVehicule" /> <form:errors
+						path="datePriseVehicule" /></td>
 			</tr>
 			<tr>
 				<td>Date de retour :</td>
-				<td><form:input path="dateRetour" /></td>
+				<td><form:input path="dateRetour" /> <form:errors
+						path="dateRetour" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Valider" /></td>

@@ -65,11 +65,15 @@ public class VoitureController {
 	// type BindingResult
 	public ModelAndView saveVoitures(@Valid Voiture voiture, BindingResult errors) {
 
-		validator.validate(voiture, errors);
-
 		if (errors.hasErrors()) {
 			return new ModelAndView("saisie-voiture", "voiture", voiture);
 
+		} else {
+			validator.validate(voiture, errors);
+			if (errors.hasErrors()) {
+				return new ModelAndView("saisie-voiture", "voiture", voiture);
+
+			}
 		}
 
 		try {

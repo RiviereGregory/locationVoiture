@@ -3,8 +3,11 @@ package fr.treeptik.locationvoiture.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +18,7 @@ import fr.treeptik.locationvoiture.model.Reservation;
 import fr.treeptik.locationvoiture.service.ClientService;
 import fr.treeptik.locationvoiture.service.ReservationService;
 import fr.treeptik.locationvoiture.service.VoitureService;
+import fr.treeptik.locationvoiture.validator.ReservationValidator;
 
 @Controller
 public class ReservationController {
@@ -25,6 +29,8 @@ public class ReservationController {
 	private VoitureService voitureService;
 	@Autowired
 	private ClientService clientService;
+	@Autowired
+	private ReservationValidator validator;
 
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
 	public ModelAndView intiReserv() {
@@ -66,15 +72,39 @@ public class ReservationController {
 	}
 
 	@RequestMapping(value = "/reservations.do", method = RequestMethod.POST)
-	public ModelAndView saveReservation(Reservation reservation) {
+	public ModelAndView saveReservation(@Valid Reservation reservation, BindingResult errors) {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			if (errors.hasErrors()) {
+				params.put("voitures", voitureService.findAll());
+				params.put("clients", clientService.findAll());
+				params.put("reservation", reservation);
+				params.put("errors", errors);
+				return new ModelAndView("saisie-reservation", params);
+
+			} else {
+				validator.validate(reservation, errors);
+				if (errors.hasErrors()) {
+					params.put("voitures", voitureService.findAll());
+					params.put("clients", clientService.findAll());
+					params.put("reservation", reservation);
+					params.put("errors", errors);
+					return new ModelAndView("saisie-reservation", params);
+				}
+
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		
 
 		try {
 			reservationService.save(reservation);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-
-		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
 			params.put("reservations", reservationService.findAll());

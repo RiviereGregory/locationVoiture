@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Client implements Serializable {
 
@@ -16,10 +19,14 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@NotBlank
 	private String nom;
 
+	@NotBlank
 	private String prenom;
 
+	@NotBlank
+	@Email
 	private String mail;
 
 	public Client() {
