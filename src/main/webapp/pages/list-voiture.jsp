@@ -5,6 +5,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- pour les jstl pour utiliser foreach entre autre-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<!-- Pour formater les date -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,17 +16,18 @@
 </head>
 <body>
 	<c:if test="${empty voitures}">
-		<h1>La liste des voitures est vide</h1>
+		<h1 align="center">La liste des voitures est vide</h1>
 		<br />
 		<br />
-		<form:form action="voiture.do" commandName="voiture" method="GET">
+		<form:form action="voiture.do" commandName="voiture" method="GET"
+			align="center">
 			<input type="submit" value="Ajouter Voiture" />
 		</form:form>
 	</c:if>
 	<c:if test="${not empty voitures}">
-		<h1>liste des voitures</h1>
+		<h1 align="center">liste des voitures</h1>
 		<br />
-		<table border="2">
+		<table border="2" align="center">
 			<tr>
 				<th>ID</th>
 				<th>Marque</th>
@@ -39,7 +42,8 @@
 					<td>${v.id}</td>
 					<td>${v.marque}</td>
 					<td>${v.modele}</td>
-					<td>${v.dateMiseEnCirculation}</td>
+					<td><fmt:formatDate value="${v.dateMiseEnCirculation}"
+							pattern="dd/MM/yyyy" /></td>
 					<td><a href="modifier-voiture.do?id=${v.id}">Modifier </a></td>
 					<td><a href="supprimer-voiture.do?id=${v.id}">Supprimer </a></td>
 
@@ -48,9 +52,22 @@
 		</table>
 		<br />
 		<br />
-		<form:form action="voiture.do" commandName="voiture" method="GET">
-			<input type="submit" value="Ajouter Voiture" />
-		</form:form>
+		<table border="2" align="center">
+			<tr>
+				<td><form:form action="voiture.do" commandName="voiture"
+						method="GET">
+						<input type="submit" value="Ajouter Voiture" />
+					</form:form></td>
+				<td><form:form action="clients.do" commandName="client"
+						method="GET">
+						<input type="submit" value="Liste des clients" />
+					</form:form></td>
+				<td><form:form action="reservations.do"
+						commandName="reservation" method="GET">
+						<input type="submit" value="Liste des reservations" />
+					</form:form></td>
+			</tr>
+		</table>
 	</c:if>
 </body>
 </html>

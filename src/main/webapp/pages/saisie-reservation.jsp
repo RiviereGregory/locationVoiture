@@ -15,11 +15,11 @@
 <body>
 	<!-- Dans le if la condition on la met ${ici } -->
 	<c:if test="${empty reservation.id}">
-		<h1>Saisie reservation</h1>
+		<h1 align="center">Saisie reservation</h1>
 		<br />
 	</c:if>
 	<c:if test="${not empty reservation.id}">
-		<h1>Modifier reservation</h1>
+		<h1 align="center">Modifier reservation</h1>
 		<br />
 	</c:if>
 
@@ -28,7 +28,7 @@
 		method="POST">
 
 		<form:hidden path="id" />
-		<table>
+		<table align="center">
 			<tr>
 
 				<td>Voiture :</td>
@@ -55,18 +55,19 @@
 			</tr>
 			<tr>
 				<td>Date de resevation :</td>
-				<td><form:input path="dateReservation" /> <form:errors
-						path="dateReservation" /></td>
+				<!-- 				Le placeholder="DD/MM/YYYY" permet de mettre le modele dans la case -->
+				<td><form:input path="dateReservation" placeholder="JJ/MM/AAAA" />
+					<form:errors path="dateReservation" /></td>
 			</tr>
 			<tr>
 				<td>Date de prise du vehicule :</td>
-				<td><form:input path="datePriseVehicule" /> <form:errors
-						path="datePriseVehicule" /></td>
+				<td><form:input path="datePriseVehicule"
+						placeholder="JJ/MM/AAAA" /> <form:errors path="datePriseVehicule" /></td>
 			</tr>
 			<tr>
 				<td>Date de retour :</td>
-				<td><form:input path="dateRetour" /> <form:errors
-						path="dateRetour" /></td>
+				<td><form:input path="dateRetour" placeholder="JJ/MM/AAAA" />
+					<form:errors path="dateRetour" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Valider" /></td>

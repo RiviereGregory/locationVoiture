@@ -15,11 +15,11 @@
 <body>
 	<!-- Dans le if la condition on la met ${ici } -->
 	<c:if test="${empty client.id}">
-		<h1>Saisie client</h1>
+		<h1 align="center">Saisie client</h1>
 		<br />
 	</c:if>
 	<c:if test="${not empty client.id}">
-		<h1>Modifier client</h1>
+		<h1 align="center">Modifier client</h1>
 		<br />
 	</c:if>
 
@@ -29,21 +29,19 @@
 
 		<!-- 		Pour recuperer la variable id dans voiture -->
 		<form:hidden path="id" />
-		<table>
+		<table align="center">
 			<tr>
 				<td>Nom :</td>
-				<td><form:input path="nom" />
-					<form:errors path="nom" /></td>
+				<td><form:input path="nom" /> <form:errors path="nom" /></td>
 			</tr>
 			<tr>
 				<td>Prenom :</td>
-				<td><form:input path="prenom" />
-					<form:errors path="prenom" /></td>
+				<td><form:input path="prenom" /> <form:errors path="prenom" /></td>
 			</tr>
 			<tr>
 				<td>Email :</td>
-				<td><form:input path="mail" />
-					<form:errors path="mail" /></td>
+				<td><form:input path="mail" placeholder="mail@domain.com" /> <form:errors
+						path="mail" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Valider" /></td>

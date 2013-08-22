@@ -15,11 +15,11 @@
 <body>
 	<!-- Dans le if la condition on la met ${ici } -->
 	<c:if test="${empty voiture.id}">
-		<h1>Saisie voiture</h1>
+		<h1 align="center">Saisie voiture</h1>
 		<br />
 	</c:if>
 	<c:if test="${not empty voiture.id}">
-		<h1>Modifier voiture</h1>
+		<h1 align="center">Modifier voiture</h1>
 		<br />
 	</c:if>
 
@@ -29,7 +29,7 @@
 
 		<!-- 		Pour recuperer la variable id dans voiture -->
 		<form:hidden path="id" />
-		<table>
+		<table align="center">
 
 
 
@@ -43,7 +43,8 @@
 			</tr>
 			<tr>
 				<td>Date :</td>
-				<td><form:input path="dateMiseEnCirculation" /> <form:errors
+				<td><form:input path="dateMiseEnCirculation"
+						placeholder="JJ/MM/AAAA" /> <form:errors
 						path="dateMiseEnCirculation" /></td>
 			</tr>
 			<tr>

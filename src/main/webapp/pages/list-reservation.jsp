@@ -5,6 +5,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- pour les jstl pour utiliser foreach entre autre-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<!-- Pour formater les date -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,18 +16,18 @@
 </head>
 <body>
 	<c:if test="${empty reservations}">
-		<h1>La liste des reservations est vide</h1>
+		<h1 align="center">La liste des reservations est vide</h1>
 		<br />
 		<br />
 		<form:form action="reservation.do" commandName="reservation"
-			method="GET">
+			method="GET" align="center">
 			<input type="submit" value="Ajouter reservation" />
 		</form:form>
 	</c:if>
 	<c:if test="${not empty reservations}">
-		<h1>liste des reservations</h1>
+		<h1 align="center">liste des reservations</h1>
 		<br />
-		<table border="2">
+		<table border="2" align="center">
 			<tr>
 				<th>ID</th>
 				<th>Client Id</th>
@@ -42,9 +44,16 @@
 					<td>${reservation.id}</td>
 					<td>${reservation.client.id}</td>
 					<td>${reservation.voiture.id}</td>
-					<td>${reservation.dateReservation}</td>
-					<td>${reservation.datePriseVehicule}</td>
-					<td>${reservation.dateRetour}</td>
+
+					<td><fmt:formatDate value="${reservation.dateReservation}"
+							pattern="dd/MM/yyyy" /></td>
+
+					<td><fmt:formatDate value="${reservation.datePriseVehicule}"
+							pattern="dd/MM/yyyy" /></td>
+
+					<td><fmt:formatDate value="${reservation.dateRetour}"
+							pattern="dd/MM/yyyy" /></td>
+
 					<td><a href="modifier-reservation.do?id=${reservation.id}">Modifier
 					</a></td>
 					<td><a href="supprimer-reservation.do?id=${reservation.id}">Supprimer
@@ -55,10 +64,22 @@
 		</table>
 		<br />
 		<br />
-		<form:form action="reservation.do" commandName="reservation"
-			method="GET">
-			<input type="submit" value="Ajouter reservation" />
-		</form:form>
+		<table border="2" align="center">
+			<tr>
+				<td><form:form action="reservation.do"
+						commandName="reservation" method="GET">
+						<input type="submit" value="Ajouter reservation" />
+					</form:form></td>
+				<td><form:form action="voitures.do" commandName="voiture"
+						method="GET">
+						<input type="submit" value="Liste des voitures" />
+					</form:form></td>
+				<td><form:form action="clients.do" commandName="client"
+						method="GET">
+						<input type="submit" value="Liste des clients" />
+					</form:form></td>
+			</tr>
+		</table>
 	</c:if>
 </body>
 </html>

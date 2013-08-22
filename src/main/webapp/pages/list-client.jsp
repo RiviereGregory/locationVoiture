@@ -14,17 +14,18 @@
 </head>
 <body>
 	<c:if test="${empty clients}">
-		<h1>La liste des clients est vide</h1>
+		<h1 align="center">La liste des clients est vide</h1>
 		<br />
 		<br />
-		<form:form action="client.do" commandName="client" method="GET">
+		<form:form action="client.do" commandName="client" method="GET"
+			align="center">
 			<input type="submit" value="Ajouter client" />
 		</form:form>
 	</c:if>
 	<c:if test="${not empty clients}">
-		<h1>liste des clients</h1>
+		<h1 align="center">liste des clients</h1>
 		<br />
-		<table border="2">
+		<table border="2" align="center">
 			<tr>
 				<th>ID</th>
 				<th>Nom</th>
@@ -50,9 +51,23 @@
 		</table>
 		<br />
 		<br />
-		<form:form action="client.do" commandName="client" method="GET">
-			<input type="submit" value="Ajouter client" />
-		</form:form>
+		<table border="2" align="center">
+			<tr>
+				<td><form:form action="client.do" commandName="client"
+						method="GET">
+						<input type="submit" value="Ajouter client" />
+					</form:form></td>
+				<td><form:form action="reservations.do"
+						commandName="reservation" method="GET">
+						<input type="submit" value="Liste des reservations" />
+					</form:form></td>
+				<td><form:form action="voitures.do" commandName="voiture"
+						method="GET">
+						<input type="submit" value="Liste des voitures" />
+					</form:form></td>
+			</tr>
+		</table>
+		<br />
 	</c:if>
 </body>
 </html>
