@@ -24,7 +24,7 @@ public class GenericDAOJPA<T, PK> implements GenericDAO<T, PK> {
 	@Override
 	public T save(T entite) throws DAOException {
 		try {
-			entityManager.persist(entite);
+			entityManager.merge(entite);
 		} catch (PersistenceException e) {
 			throw new DAOException(e.getMessage(), e.getCause());
 		}

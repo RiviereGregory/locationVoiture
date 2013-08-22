@@ -10,41 +10,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Saisie voiture</title>
+<title>Saisie client</title>
 </head>
 <body>
 	<!-- Dans le if la condition on la met ${ici } -->
-	<c:if test="${empty voiture.id}">
-		<h1>Saisie voiture</h1>
+	<c:if test="${empty client.id}">
+		<h1>Saisie client</h1>
 		<br />
 	</c:if>
-	<c:if test="${not empty voiture.id}">
-		<h1>Modifier voiture</h1>
+	<c:if test="${not empty client.id}">
+		<h1>Modifier client</h1>
 		<br />
 	</c:if>
 
 	<!--  action page sur laquelle il va lorsque l'on appui sur valider -->
-	<form:form action="voitures.do" commandName="voiture" method="POST">
+	<form:form action="clients.do" commandName="client" method="POST">
 
 
 		<!-- 		Pour recuperer la variable id dans voiture -->
 		<form:hidden path="id" />
 		<table>
-
-
-
 			<tr>
-				<td>Marque :</td>
-				<td><form:input path="marque" /> <form:errors path="marque" /></td>
+				<td>Nom :</td>
+				<td><form:input path="nom" /></td>
 			</tr>
 			<tr>
-				<td>Modele :</td>
-				<td><form:input path="modele" /> <form:errors path="modele" /></td>
+				<td>Prenom :</td>
+				<td><form:input path="prenom" /></td>
 			</tr>
 			<tr>
-				<td>Date :</td>
-				<td><form:input path="dateMiseEnCirculation" /> <form:errors
-						path="dateMiseEnCirculation" /></td>
+				<td>Email :</td>
+				<td><form:input path="mail" /></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Valider" /></td>
