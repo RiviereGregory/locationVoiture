@@ -31,9 +31,12 @@
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th>ID</th>
-				<th>Nom</th>
-				<th>Prenom</th>
+				<th>ID <a href="orderbyid-client.do">Up</a> <a
+					href="orderbyidinvert-client.do">Down</a></th>
+				<th>Nom <a href="orderbyidnom-client.do">Up</a> <a
+					href="orderbyidnominvert-client.do">Down</a></th>
+				<th>Prenom<a href="orderbyidprenom-client.do">Up</a> <a
+					href="orderbyidprenominvert-client.do">Down</a></th>
 				<th>Email</th>
 				<th colspan="2">Action</th>
 			</tr>

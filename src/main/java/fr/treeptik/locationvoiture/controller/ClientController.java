@@ -1,6 +1,8 @@
 package fr.treeptik.locationvoiture.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -128,6 +130,96 @@ public class ClientController {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			System.out.println("Impossible effacer");
+		}
+		return new ModelAndView("list-client", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyid-client.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdClient() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			params.put("clients", clientService.findAll());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-client", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyidinvert-client.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdInvertClient() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Client> list = clientService.findAll();
+			Collections.reverse(list);
+			params.put("clients", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-client", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyidnom-client.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdNomPrenomClient() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			params.put("clients", clientService.findAllOrderByNomPrenom());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-client", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyidnominvert-client.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdNomPrenomInvertClient() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Client> list = clientService.findAllOrderByNomPrenom();
+			Collections.reverse(list);
+			params.put("clients", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-client", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyidprenom-client.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdPrenomNomClient() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			params.put("clients", clientService.findAllOrderByPrenomNom());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-client", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyidprenominvert-client.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdPrenomNomInvertClient() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Client> list = clientService.findAllOrderByPrenomNom();
+			Collections.reverse(list);
+			params.put("clients", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
 		}
 		return new ModelAndView("list-client", params);
 

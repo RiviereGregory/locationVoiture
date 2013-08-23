@@ -66,7 +66,6 @@ public abstract class GenericServiceImpl<T, PK, D extends GenericDAO<T, PK>> imp
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage(), e.getCause());
 		}
-
 	}
 
 }

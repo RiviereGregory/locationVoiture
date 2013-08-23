@@ -21,6 +21,7 @@ public class GenericDAOJPA<T, PK> implements GenericDAO<T, PK> {
 		this.type = type;
 	}
 
+	
 	@Override
 	public T save(T entite) throws DAOException {
 		try {

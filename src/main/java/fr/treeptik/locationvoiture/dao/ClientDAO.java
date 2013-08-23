@@ -9,4 +9,6 @@ public interface ClientDAO extends GenericDAO<Client, Integer> {
 
 	List<Client> findAllOrderByNomPrenom() throws DAOException;
 
+	List<Client> findAllOrderByPrenomNom() throws DAOException;
+
 }

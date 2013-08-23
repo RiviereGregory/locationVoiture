@@ -34,4 +34,16 @@ public class ClientServiceImpl extends GenericServiceImpl<Client, Integer, Clien
 		}
 		return list;
 	}
+
+	@Override
+	public List<Client> findAllOrderByPrenomNom() throws ServiceException {
+		List<Client> list;
+		try {
+			list = clientDAO.findAllOrderByPrenomNom();
+		} catch (DAOException e) {
+
+			throw new ServiceException(e.getMessage(), e.getCause());
+		}
+		return list;
+	}
 }

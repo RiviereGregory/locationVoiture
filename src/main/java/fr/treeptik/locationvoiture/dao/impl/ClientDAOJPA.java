@@ -32,4 +32,18 @@ public class ClientDAOJPA extends GenericDAOJPA<Client, Integer> implements Clie
 		return list;
 	}
 
+	@Override
+	public List<Client> findAllOrderByPrenomNom() throws DAOException {
+		List<Client> list;
+		try {
+			TypedQuery<Client> createQuery = entityManager.createQuery(
+					"SELECT cli FROM Client cli ORDER BY cli.prenom ASC, cli.nom ", Client.class);
+			list = createQuery.getResultList();
+		} catch (PersistenceException e) {
+			throw new DAOException(e.getMessage(), e.getCause());
+		}
+
+		return list;
+	}
+
 }

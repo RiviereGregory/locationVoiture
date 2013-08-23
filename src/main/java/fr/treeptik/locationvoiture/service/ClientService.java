@@ -10,4 +10,6 @@ public interface ClientService extends GenericService<Client, Integer, ClientDAO
 
 	List<Client> findAllOrderByNomPrenom() throws ServiceException;
 
+	List<Client> findAllOrderByPrenomNom() throws ServiceException;
+
 }

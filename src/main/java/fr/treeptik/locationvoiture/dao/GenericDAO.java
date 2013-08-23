@@ -15,4 +15,5 @@ public interface GenericDAO<T, PK> {
 	List<T> findAll() throws DAOException;
 
 	void removeById(PK id) throws DAOException;
+	
 }
