@@ -46,4 +46,37 @@ public class ReservationServiceImpl extends
 		return list;
 	}
 
+	@Override
+	public List<Reservation> findAllOrderByDateReservation() throws ServiceException {
+		List<Reservation> list;
+		try {
+			list = getDao().findAllOrderByDateReservation();
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e.getCause());
+		}
+		return list;
+	}
+
+	@Override
+	public List<Reservation> findAllOrderByDatePriseVehicule() throws ServiceException {
+		List<Reservation> list;
+		try {
+			list = getDao().findAllOrderByDatePriseVehicule();
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e.getCause());
+		}
+		return list;
+	}
+
+	@Override
+	public List<Reservation> findAllOrderByDateretour() throws ServiceException {
+		List<Reservation> list;
+		try {
+			list = getDao().findAllOrderByDateRetour();
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e.getCause());
+		}
+		return list;
+	}
+
 }

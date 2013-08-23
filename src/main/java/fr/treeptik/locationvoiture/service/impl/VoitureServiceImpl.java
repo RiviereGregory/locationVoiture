@@ -1,9 +1,13 @@
 package fr.treeptik.locationvoiture.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.treeptik.locationvoiture.dao.VoitureDAO;
+import fr.treeptik.locationvoiture.exception.DAOException;
+import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Voiture;
 import fr.treeptik.locationvoiture.service.VoitureService;
 
@@ -17,6 +21,17 @@ public class VoitureServiceImpl extends GenericServiceImpl<Voiture, Integer, Voi
 	@Override
 	protected VoitureDAO getDao() {
 		return voitureDAO;
+	}
+
+	@Override
+	public List<Voiture> findAllOrderByMarqueModele() throws ServiceException {
+		List<Voiture> list;
+		try {
+			list = voitureDAO.findAllOrderByMarqueModele();
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e.getCause());
+		}
+		return list;
 	}
 	//
 	// @Override

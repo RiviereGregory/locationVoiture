@@ -38,8 +38,10 @@ public class ReservationController {
 		Reservation reservation = new Reservation();
 
 		try {
-			params.put("voitures", voitureService.findAll());
-			params.put("clients", clientService.findAll());
+			// params.put("voitures", voitureService.findAll());
+			params.put("voitures", voitureService.findAllOrderByMarqueModele());
+			// params.put("clients", clientService.findAll());
+			params.put("clients", clientService.findAllOrderByNomPrenom());
 			params.put("reservation", reservation);
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -57,8 +59,10 @@ public class ReservationController {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
-			params.put("voitures", voitureService.findAll());
-			params.put("clients", clientService.findAll());
+			// params.put("voitures", voitureService.findAll());
+			params.put("voitures", voitureService.findAllOrderByMarqueModele());
+			// params.put("clients", clientService.findAll());
+			params.put("clients", clientService.findAllOrderByNomPrenom());
 			params.put("reservation", reservation);
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -78,8 +82,10 @@ public class ReservationController {
 
 		try {
 			if (errors.hasErrors()) {
-				params.put("voitures", voitureService.findAll());
-				params.put("clients", clientService.findAll());
+				// params.put("voitures", voitureService.findAll());
+				params.put("voitures", voitureService.findAllOrderByMarqueModele());
+				// params.put("clients", clientService.findAll());
+				params.put("clients", clientService.findAllOrderByNomPrenom());
 				params.put("reservation", reservation);
 				params.put("errors", errors);
 				return new ModelAndView("saisie-reservation", params);
@@ -87,8 +93,10 @@ public class ReservationController {
 			} else {
 				validator.validate(reservation, errors);
 				if (errors.hasErrors()) {
-					params.put("voitures", voitureService.findAll());
-					params.put("clients", clientService.findAll());
+					// params.put("voitures", voitureService.findAll());
+					params.put("voitures", voitureService.findAllOrderByMarqueModele());
+					// params.put("clients", clientService.findAll());
+					params.put("clients", clientService.findAllOrderByNomPrenom());
 					params.put("reservation", reservation);
 					params.put("errors", errors);
 					return new ModelAndView("saisie-reservation", params);
@@ -98,7 +106,6 @@ public class ReservationController {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
-		
 
 		try {
 			reservationService.save(reservation);
@@ -137,8 +144,10 @@ public class ReservationController {
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
 			r = reservationService.findById(id);
-			params.put("voitures", voitureService.findAll());
-			params.put("clients", clientService.findAll());
+			// params.put("voitures", voitureService.findAll());
+			params.put("voitures", voitureService.findAllOrderByMarqueModele());
+			// params.put("clients", clientService.findAll());
+			params.put("clients", clientService.findAllOrderByNomPrenom());
 			params.put("reservation", r);
 
 		} catch (ServiceException e) {
@@ -155,6 +164,61 @@ public class ReservationController {
 
 		try {
 			reservationService.removeById(id);
+			params.put("reservations", reservationService.findAll());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+	}
+
+	@RequestMapping(value = "/orderbydatereservation-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByDateReservation() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			params.put("reservations", reservationService.findAllOrderByDateReservation());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+
+	}
+
+	@RequestMapping(value = "/orderbydateprisevehicule-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByDatePriseVehicule() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			params.put("reservations", reservationService.findAllOrderByDatePriseVehicule());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+
+	}
+
+	@RequestMapping(value = "/orderbydateretour-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByDateRetour() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			params.put("reservations", reservationService.findAllOrderByDateretour());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyid-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdReservation() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
 			params.put("reservations", reservationService.findAll());
 		} catch (ServiceException e) {
 			e.printStackTrace();

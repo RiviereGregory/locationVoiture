@@ -1,8 +1,14 @@
 package fr.treeptik.locationvoiture.dao.impl;
 
+import java.util.List;
+
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 
 import fr.treeptik.locationvoiture.dao.VoitureDAO;
+import fr.treeptik.locationvoiture.exception.DAOException;
 import fr.treeptik.locationvoiture.model.Voiture;
 
 @Repository
@@ -11,6 +17,42 @@ public class VoitureDAOJPA extends GenericDAOJPA<Voiture, Integer> implements Vo
 	public VoitureDAOJPA() {
 		super(Voiture.class);
 	}
+
+	@Override
+	public List<Voiture> findAllOrderByMarqueModele() throws DAOException {
+		List<Voiture> list;
+		try {
+			TypedQuery<Voiture> query = entityManager.createQuery(
+					"SELECT voi FROM Voiture voi ORDER BY voi.marque ASC, voi.modele",
+					Voiture.class);
+
+			list = query.getResultList();
+
+		} catch (PersistenceException e) {
+			throw new DAOException(e.getMessage(), e.getCause());
+		}
+
+		return list;
+	}
+
+	// @Override
+	// public List<Voiture> findIsDispo(Date debut, Date fin) throws DAOException {
+	// List<Voiture> list;
+	// try {
+	// TypedQuery<Voiture> query = entityManager
+	// .createQuery(
+	// "SELECT voi FROM VOITURE JOIN voi.reservations res WHERE voi.reservations.datePriseVehicule = :debut",
+	// Voiture.class);
+	// query.setParameter("debut", debut);
+	//
+	// list = query.getResultList();
+	//
+	// } catch (PersistenceException e) {
+	// throw new DAOException(e.getMessage(), e.getCause());
+	// }
+	//
+	// return list;
+	// }
 
 	// @PersistenceContext
 	// private EntityManager entityManager;

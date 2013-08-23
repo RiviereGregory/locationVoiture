@@ -11,4 +11,10 @@ public interface ReservationDAO extends GenericDAO<Reservation, Integer> {
 
 	List<Reservation> findByVoiture(Integer id) throws DAOException;
 
+	List<Reservation> findAllOrderByDateReservation() throws DAOException;
+
+	List<Reservation> findAllOrderByDatePriseVehicule() throws DAOException;
+
+	List<Reservation> findAllOrderByDateRetour() throws DAOException;
+
 }

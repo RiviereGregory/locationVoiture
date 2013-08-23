@@ -27,6 +27,10 @@
 
 	</table>
 
-
+	<form:form action="index.do" commandName="index" method="GET">
+		<p align="center">
+			<input type="submit" value="SOMMAIRE" />
+		</p>
+	</form:form>
 </body>
 </html>

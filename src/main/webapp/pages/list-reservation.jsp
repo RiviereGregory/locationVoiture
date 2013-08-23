@@ -29,12 +29,12 @@
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th>ID</th>
+				<th><a href="orderbyid-reservation.do">ID</a></th>
 				<th>Client Id</th>
 				<th>Voiture Id</th>
-				<th>dateReservation</th>
-				<th>datePriseVehicule</th>
-				<th>dateRetour</th>
+				<th><a href="orderbydatereservation-reservation.do">dateReservation</a></th>
+				<th><a href="orderbydateprisevehicule-reservation.do">datePriseVehicule</a></th>
+				<th><a href="orderbydateretour-reservation.do">dateRetour</a></th>
 				<th colspan="2">Action</th>
 			</tr>
 
@@ -81,5 +81,10 @@
 			</tr>
 		</table>
 	</c:if>
+	<form:form action="index.do" commandName="index" method="GET">
+		<p align="center">
+			<input type="submit" value="SOMMAIRE" />
+		</p>
+	</form:form>
 </body>
 </html>

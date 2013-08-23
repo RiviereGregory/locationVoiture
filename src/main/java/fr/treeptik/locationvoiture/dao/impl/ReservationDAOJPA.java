@@ -48,4 +48,49 @@ public class ReservationDAOJPA extends GenericDAOJPA<Reservation, Integer> imple
 		}
 	}
 
+	@Override
+	public List<Reservation> findAllOrderByDateReservation() throws DAOException {
+		List<Reservation> list;
+		try {
+			TypedQuery<Reservation> createQuery = entityManager.createQuery(
+					"SELECT res FROM Reservation res ORDER BY res.dateReservation ASC",
+					Reservation.class);
+			list = createQuery.getResultList();
+		} catch (PersistenceException e) {
+			throw new DAOException(e.getMessage(), e.getCause());
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<Reservation> findAllOrderByDatePriseVehicule() throws DAOException {
+		List<Reservation> list;
+		try {
+			TypedQuery<Reservation> createQuery = entityManager.createQuery(
+					"SELECT res FROM Reservation res ORDER BY res.datePriseVehicule ASC",
+					Reservation.class);
+			list = createQuery.getResultList();
+		} catch (PersistenceException e) {
+			throw new DAOException(e.getMessage(), e.getCause());
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<Reservation> findAllOrderByDateRetour() throws DAOException {
+		List<Reservation> list;
+		try {
+			TypedQuery<Reservation> createQuery = entityManager.createQuery(
+					"SELECT res FROM Reservation res ORDER BY res.dateRetour ASC",
+					Reservation.class);
+			list = createQuery.getResultList();
+		} catch (PersistenceException e) {
+			throw new DAOException(e.getMessage(), e.getCause());
+		}
+
+		return list;
+	}
+
 }
