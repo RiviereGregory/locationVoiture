@@ -10,6 +10,10 @@ public interface VoitureService extends GenericService<Voiture, Integer, Voiture
 
 	List<Voiture> findAllOrderByMarqueModele() throws ServiceException;
 
+	List<Voiture> findAllOrderByModeleMarque() throws ServiceException;
+
+	List<Voiture> findAllOrderByDate() throws ServiceException;
+
 	// Voiture save(Voiture voiture) throws ServiceException;
 	//
 	// void remove(Voiture voiture) throws ServiceException;

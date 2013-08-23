@@ -1,6 +1,8 @@
 package fr.treeptik.locationvoiture.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -153,6 +155,94 @@ public class VoitureController {
 		}
 		return new ModelAndView("list-voiture", params);
 
+	}
+
+	@RequestMapping(value = "/orderbyid-voiture.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdVoiture() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			params.put("voitures", voitureService.findAll());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-voiture", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyidinvert-voiture.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdInvertVoiture() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Voiture> list = voitureService.findAll();
+			Collections.reverse(list);
+			params.put("voitures", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-voiture", params);
+
+	}
+	@RequestMapping(value = "/orderbymarque-voiture.do", method = RequestMethod.GET)
+	public ModelAndView orderByMarqueVoiture() {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		try {
+			params.put("voitures", voitureService.findAllOrderByMarqueModele());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-voiture", params);
+		
+	}
+	
+	@RequestMapping(value = "/orderbymarqueinvert-voiture.do", method = RequestMethod.GET)
+	public ModelAndView orderByMarqueInvertVoiture() {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		try {
+			List<Voiture> list = voitureService.findAllOrderByMarqueModele();
+			Collections.reverse(list);
+			params.put("voitures", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-voiture", params);
+		
+	}
+	@RequestMapping(value = "/orderbymodele-voiture.do", method = RequestMethod.GET)
+	public ModelAndView orderByModeleVoiture() {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		try {
+			params.put("voitures", voitureService.findAllOrderByModeleMarque());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-voiture", params);
+		
+	}
+	
+	@RequestMapping(value = "/orderbymodeleinvert-voiture.do", method = RequestMethod.GET)
+	public ModelAndView orderByModeleInvertVoiture() {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		try {
+			List<Voiture> list = voitureService.findAllOrderByModeleMarque();
+			Collections.reverse(list);
+			params.put("voitures", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-voiture", params);
+		
 	}
 
 }

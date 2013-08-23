@@ -35,6 +35,40 @@ public class VoitureDAOJPA extends GenericDAOJPA<Voiture, Integer> implements Vo
 		return list;
 	}
 
+	@Override
+	public List<Voiture> findAllOrderByModeleMarque() throws DAOException {
+		List<Voiture> list;
+		try {
+			TypedQuery<Voiture> query = entityManager.createQuery(
+					"SELECT voi FROM Voiture voi ORDER BY voi.modele ASC, voi.marque",
+					Voiture.class);
+
+			list = query.getResultList();
+
+		} catch (PersistenceException e) {
+			throw new DAOException(e.getMessage(), e.getCause());
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<Voiture> findAllOrderByDate() throws DAOException {
+		List<Voiture> list;
+		try {
+			TypedQuery<Voiture> query = entityManager.createQuery(
+					"SELECT voi FROM Voiture voi ORDER BY voi.dateMiseEnCirculation ASC",
+					Voiture.class);
+
+			list = query.getResultList();
+
+		} catch (PersistenceException e) {
+			throw new DAOException(e.getMessage(), e.getCause());
+		}
+
+		return list;
+	}
+
 	// @Override
 	// public List<Voiture> findIsDispo(Date debut, Date fin) throws DAOException {
 	// List<Voiture> list;

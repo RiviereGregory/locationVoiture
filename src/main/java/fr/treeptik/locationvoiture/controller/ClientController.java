@@ -165,7 +165,7 @@ public class ClientController {
 
 	}
 
-	@RequestMapping(value = "/orderbyidnom-client.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/orderbynom-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdNomPrenomClient() {
 
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -179,7 +179,7 @@ public class ClientController {
 
 	}
 
-	@RequestMapping(value = "/orderbyidnominvert-client.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/orderbynominvert-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdNomPrenomInvertClient() {
 
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -195,7 +195,7 @@ public class ClientController {
 
 	}
 
-	@RequestMapping(value = "/orderbyidprenom-client.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/orderbyprenom-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdPrenomNomClient() {
 
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -209,7 +209,7 @@ public class ClientController {
 
 	}
 
-	@RequestMapping(value = "/orderbyidprenominvert-client.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/orderbyprenominvert-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdPrenomNomInvertClient() {
 
 		Map<String, Object> params = new HashMap<String, Object>();

@@ -33,6 +33,29 @@ public class VoitureServiceImpl extends GenericServiceImpl<Voiture, Integer, Voi
 		}
 		return list;
 	}
+
+	@Override
+	public List<Voiture> findAllOrderByModeleMarque() throws ServiceException {
+		List<Voiture> list;
+		try {
+			list = voitureDAO.findAllOrderByModeleMarque();
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e.getCause());
+		}
+		return list;
+	}
+
+	@Override
+	public List<Voiture> findAllOrderByDate() throws ServiceException {
+		List<Voiture> list;
+		try {
+			list = voitureDAO.findAllOrderByDate();
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e.getCause());
+		}
+		return list;
+	}
+
 	//
 	// @Override
 	// @Transactional

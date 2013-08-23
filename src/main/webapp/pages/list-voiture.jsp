@@ -33,9 +33,12 @@
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th>ID</th>
-				<th>Marque</th>
-				<th>Modele</th>
+				<th>ID <a href="orderbyid-voiture.do">Up</a> <a
+					href="orderbyidinvert-voiture.do">Down</a></th>
+				<th>Marque<a href="orderbymarque-voiture.do">Up</a> <a
+					href="orderbymarqueinvert-voiture.do">Down</a></th>
+				<th>Modele<a href="orderbymodele-voiture.do">Up</a> <a
+					href="orderbymodeleinvert-voiture.do">Down</a></th>
 				<th>Date mise en circulation</th>
 				<th colspan="2">Action</th>
 			</tr>
