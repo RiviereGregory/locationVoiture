@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,19 +31,22 @@ public class Reservation implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Future
+	// Attention la date doit etre supérieure à la date courante
+	// @Future
 	@NotNull
 	private Date dateReservation;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Future
+	// Attention la date doit etre supérieure à la date courante
+	// @Future
 	@NotNull
 	private Date datePriseVehicule;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Future
+	// Attention la date doit etre supérieure à la date courante
+	// @Future
 	@NotNull
 	private Date dateRetour;
 
