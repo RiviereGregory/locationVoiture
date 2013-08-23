@@ -53,6 +53,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/clients.do", method = RequestMethod.POST)
 	public ModelAndView saveClient(@Valid Client client, BindingResult errors) {
+		Map<String, Object> params = new HashMap<String, Object>();
 
 		if (errors.hasErrors()) {
 			return new ModelAndView("saisie-client", "client", client);
@@ -67,13 +68,7 @@ public class ClientController {
 
 		try {
 			clientService.save(client);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
 
-		Map<String, Object> params = new HashMap<String, Object>();
-
-		try {
 			params.put("clients", clientService.findAll());
 		} catch (ServiceException e) {
 			e.printStackTrace();

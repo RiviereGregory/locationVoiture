@@ -69,6 +69,7 @@ public class VoitureController {
 	// @valid permet de valider l'objet s'il y a des erreurs elles sont mise dans l'objet errors de
 	// type BindingResult
 	public ModelAndView saveVoitures(@Valid Voiture voiture, BindingResult errors) {
+		Map<String, Object> params = new HashMap<String, Object>();
 
 		if (errors.hasErrors()) {
 			return new ModelAndView("saisie-voiture", "voiture", voiture);
@@ -83,14 +84,8 @@ public class VoitureController {
 
 		try {
 			voitureService.save(voiture);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
 
-		Map<String, Object> params = new HashMap<String, Object>();
-
-		// on passe la list de voiture par le service avec l'objet voitures
-		try {
+			// on passe la list de voiture par le service avec l'objet voitures
 			params.put("voitures", voitureService.findAll());
 			// params.put("supervoiture", new Voiture(5, "SUPER VOITURE", "SUPER VOITURE"));
 		} catch (ServiceException e) {
@@ -98,7 +93,6 @@ public class VoitureController {
 		}
 
 		// La map nous permet de passer plusieurs paramètre
-
 		return new ModelAndView("list-voiture", params);
 
 	}
@@ -117,7 +111,6 @@ public class VoitureController {
 		}
 
 		// La map nous permet de passer plusieurs paramètre
-
 		return new ModelAndView("list-voiture", params);
 
 	}
@@ -186,25 +179,26 @@ public class VoitureController {
 		return new ModelAndView("list-voiture", params);
 
 	}
+
 	@RequestMapping(value = "/orderbymarque-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByMarqueVoiture() {
-		
+
 		Map<String, Object> params = new HashMap<String, Object>();
-		
+
 		try {
 			params.put("voitures", voitureService.findAllOrderByMarqueModele());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 		return new ModelAndView("list-voiture", params);
-		
+
 	}
-	
+
 	@RequestMapping(value = "/orderbymarqueinvert-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByMarqueInvertVoiture() {
-		
+
 		Map<String, Object> params = new HashMap<String, Object>();
-		
+
 		try {
 			List<Voiture> list = voitureService.findAllOrderByMarqueModele();
 			Collections.reverse(list);
@@ -213,27 +207,28 @@ public class VoitureController {
 			e.printStackTrace();
 		}
 		return new ModelAndView("list-voiture", params);
-		
+
 	}
+
 	@RequestMapping(value = "/orderbymodele-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByModeleVoiture() {
-		
+
 		Map<String, Object> params = new HashMap<String, Object>();
-		
+
 		try {
 			params.put("voitures", voitureService.findAllOrderByModeleMarque());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 		return new ModelAndView("list-voiture", params);
-		
+
 	}
-	
+
 	@RequestMapping(value = "/orderbymodeleinvert-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByModeleInvertVoiture() {
-		
+
 		Map<String, Object> params = new HashMap<String, Object>();
-		
+
 		try {
 			List<Voiture> list = voitureService.findAllOrderByModeleMarque();
 			Collections.reverse(list);
@@ -242,7 +237,7 @@ public class VoitureController {
 			e.printStackTrace();
 		}
 		return new ModelAndView("list-voiture", params);
-		
+
 	}
 
 }

@@ -84,6 +84,8 @@ public class ReservationController {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
+			// Permet de tester d'abort les erreurs du pojo puis de la class validator eviter
+			// d'avoir des objet null dans le validator
 			if (errors.hasErrors()) {
 				// params.put("voitures", voitureService.findAll());
 				params.put("voitures", voitureService.findAllOrderByMarqueModele());
@@ -106,31 +108,22 @@ public class ReservationController {
 				}
 
 			}
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
 
-		try {
+			// Test si la voiture est libre sinon affiche la liste de voiture
 			if (!voitureLibre(reservation).contains(
 					voitureService.findById(reservation.getVoiture().getId()))) {
 				params.put("voitures", voitureLibre(reservation));
 				params.put("clients", clientService.findAllOrderByNomPrenom());
 				params.put("reservation", reservation);
 				params.put("erreurChoixVoiture", "voiture non disponible");
+
 				return new ModelAndView("saisie-reservation", params);
 
 			}
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
 
-		try {
+			// Enregitre la reservation créé ou update
 			reservationService.save(reservation);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
 
-		try {
 			params.put("reservations", reservationService.findAll());
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -147,19 +140,26 @@ public class ReservationController {
 			System.out.println(reservation.getDatePriseVehicule());
 			System.out.println(reservation.getDateRetour());
 			for (Reservation reservation2 : reservationService.findAll()) {
+				// Permet de garder la voiture de la réservation que l'on modifie
+				if (!reservation2.getId().equals(reservation.getId())) {
+					// Retire toutes les voitures utilisé pour les dates choisies
+					if ((reservation.getDatePriseVehicule().after(
+							reservation2.getDatePriseVehicule()) && reservation
+							.getDatePriseVehicule().before(reservation2.getDateRetour()))
+							|| (reservation.getDateRetour().after(
+									reservation2.getDatePriseVehicule()) && reservation
+									.getDateRetour().before(reservation2.getDateRetour()))
+							|| reservation.getDatePriseVehicule().equals(
+									reservation2.getDatePriseVehicule())
+							|| reservation.getDatePriseVehicule().equals(
+									reservation2.getDateRetour())
+							|| reservation.getDateRetour().equals(
+									reservation2.getDatePriseVehicule())
+							|| reservation.getDateRetour().equals(reservation2.getDateRetour())) {
 
-				if ((reservation.getDatePriseVehicule().after(reservation2.getDatePriseVehicule()) && reservation
-						.getDatePriseVehicule().before(reservation2.getDateRetour()))
-						|| (reservation.getDateRetour().after(reservation2.getDatePriseVehicule()) && reservation
-								.getDateRetour().before(reservation2.getDateRetour()))
-						|| reservation.getDatePriseVehicule().equals(
-								reservation2.getDatePriseVehicule())
-						|| reservation.getDatePriseVehicule().equals(reservation2.getDateRetour())
-						|| reservation.getDateRetour().equals(reservation2.getDatePriseVehicule())
-						|| reservation.getDateRetour().equals(reservation2.getDateRetour())) {
+						list.remove(voitureService.findById(reservation2.getVoiture().getId()));
 
-					list.remove(voitureService.findById(reservation2.getVoiture().getId()));
-
+					}
 				}
 
 			}
@@ -171,6 +171,7 @@ public class ReservationController {
 		return list;
 	}
 
+	// Permet de remettre a zéro les cases du formulaire de saisie
 	@RequestMapping(value = "/reset-reservation.do", method = RequestMethod.GET)
 	public ModelAndView resetReserv() {
 		Map<String, Object> params = new HashMap<String, Object>();
