@@ -22,7 +22,11 @@
 		<h1 align="center">Modifier reservation</h1>
 		<br />
 	</c:if>
-
+	<br />
+	<p align="center">
+		<font color=red>${erreurChoixVoiture}</font>
+	</p>
+	<br />
 	<!--  action page sur laquelle il va lorsque l'on appui sur valider -->
 	<form:form action="reservations.do" commandName="reservation"
 		method="POST">
@@ -70,14 +74,22 @@
 					<form:errors path="dateRetour" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Valider" /></td>
+				<td><input type="submit" value="Valider" /></td>
 			</tr>
 		</table>
 	</form:form>
-	<form:form action="index.do" commandName="index" method="GET">
-		<p align="center">
-			<input type="submit" value="SOMMAIRE" />
-		</p>
-	</form:form>
+	<table align="center">
+		<tr>
+			<td><form:form action="reset-reservation.do" commandName="reset"
+					method="GET">
+					<input type="submit" value="RESET" />
+				</form:form></td>
+
+			<td><form:form action="index.do" commandName="index"
+					method="GET">
+					<input type="submit" value="SOMMAIRE" />
+				</form:form></td>
+		</tr>
+	</table>
 </body>
 </html>

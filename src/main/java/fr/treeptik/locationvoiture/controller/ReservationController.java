@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Reservation;
+import fr.treeptik.locationvoiture.model.Voiture;
 import fr.treeptik.locationvoiture.service.ClientService;
 import fr.treeptik.locationvoiture.service.ReservationService;
 import fr.treeptik.locationvoiture.service.VoitureService;
@@ -110,6 +111,20 @@ public class ReservationController {
 		}
 
 		try {
+			if (!voitureLibre(reservation).contains(
+					voitureService.findById(reservation.getVoiture().getId()))) {
+				params.put("voitures", voitureLibre(reservation));
+				params.put("clients", clientService.findAllOrderByNomPrenom());
+				params.put("reservation", reservation);
+				params.put("erreurChoixVoiture", "voiture non disponible");
+				return new ModelAndView("saisie-reservation", params);
+
+			}
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+
+		try {
 			reservationService.save(reservation);
 		} catch (ServiceException e) {
 			e.printStackTrace();
@@ -122,6 +137,56 @@ public class ReservationController {
 		}
 
 		return new ModelAndView("list-reservation", params);
+
+	}
+
+	private List<Voiture> voitureLibre(Reservation reservation) {
+		List<Voiture> list = null;
+		try {
+			list = voitureService.findAllOrderByMarqueModele();
+			System.out.println(reservation.getDatePriseVehicule());
+			System.out.println(reservation.getDateRetour());
+			for (Reservation reservation2 : reservationService.findAll()) {
+
+				if ((reservation.getDatePriseVehicule().after(reservation2.getDatePriseVehicule()) && reservation
+						.getDatePriseVehicule().before(reservation2.getDateRetour()))
+						|| (reservation.getDateRetour().after(reservation2.getDatePriseVehicule()) && reservation
+								.getDateRetour().before(reservation2.getDateRetour()))
+						|| reservation.getDatePriseVehicule().equals(
+								reservation2.getDatePriseVehicule())
+						|| reservation.getDatePriseVehicule().equals(reservation2.getDateRetour())
+						|| reservation.getDateRetour().equals(reservation2.getDatePriseVehicule())
+						|| reservation.getDateRetour().equals(reservation2.getDateRetour())) {
+
+					list.remove(voitureService.findById(reservation2.getVoiture().getId()));
+
+				}
+
+			}
+
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@RequestMapping(value = "/reset-reservation.do", method = RequestMethod.GET)
+	public ModelAndView resetReserv() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		Reservation reservation = new Reservation();
+
+		try {
+			params.put("voitures", voitureService.findAllOrderByMarqueModele());
+			params.put("clients", clientService.findAllOrderByNomPrenom());
+			params.put("reservation", reservation);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+
+		ModelAndView modelAndView = new ModelAndView("saisie-reservation", params);
+
+		return modelAndView;
 
 	}
 
