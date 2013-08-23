@@ -1,6 +1,9 @@
 package fr.treeptik.locationvoiture.controller;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -185,6 +188,22 @@ public class ReservationController {
 
 	}
 
+	@RequestMapping(value = "/orderbydatereservationinvert-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByDateReservationInvert() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Reservation> list = reservationService.findAllOrderByDateReservation();
+			Collections.reverse(list);
+			params.put("reservations", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+
+	}
+
 	@RequestMapping(value = "/orderbydateprisevehicule-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByDatePriseVehicule() {
 
@@ -192,6 +211,22 @@ public class ReservationController {
 
 		try {
 			params.put("reservations", reservationService.findAllOrderByDatePriseVehicule());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+
+	}
+
+	@RequestMapping(value = "/orderbydateprisevehiculeinvert-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByDatePriseVehiculeInvert() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Reservation> list = reservationService.findAllOrderByDatePriseVehicule();
+			Collections.reverse(list);
+			params.put("reservations", list);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -213,6 +248,22 @@ public class ReservationController {
 
 	}
 
+	@RequestMapping(value = "/orderbydateretourinvert-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByDateRetourInvert() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Reservation> list = reservationService.findAllOrderByDateretour();
+			Collections.reverse(list);
+			params.put("reservations", list);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+
+	}
+
 	@RequestMapping(value = "/orderbyid-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdReservation() {
 
@@ -220,6 +271,22 @@ public class ReservationController {
 
 		try {
 			params.put("reservations", reservationService.findAll());
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("list-reservation", params);
+
+	}
+
+	@RequestMapping(value = "/orderbyidinvert-reservation.do", method = RequestMethod.GET)
+	public ModelAndView orderByIdInvertReservation() {
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		try {
+			List<Reservation> list = reservationService.findAll();
+			Collections.reverse(list);
+			params.put("reservations", list);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

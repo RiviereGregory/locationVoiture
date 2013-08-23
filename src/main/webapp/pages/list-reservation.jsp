@@ -29,12 +29,18 @@
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th><a href="orderbyid-reservation.do">ID</a></th>
+				<th>ID <a href="orderbyid-reservation.do">Up</a> <a
+					href="orderbyidinvert-reservation.do">Down</a></th>
 				<th>Client Id</th>
 				<th>Voiture Id</th>
-				<th><a href="orderbydatereservation-reservation.do">dateReservation</a></th>
-				<th><a href="orderbydateprisevehicule-reservation.do">datePriseVehicule</a></th>
-				<th><a href="orderbydateretour-reservation.do">dateRetour</a></th>
+				<th>Date Reservation <a
+					href="orderbydatereservation-reservation.do">Up</a> <a
+					href="orderbydatereservationinvert-reservation.do">Down</a></th>
+				<th>Date Prise Vehicule <a
+					href="orderbydateprisevehicule-reservation.do">Up</a> <a
+					href="orderbydateprisevehiculeinvert-reservation.do">Down</a></th>
+				<th>Date Retour <a href="orderbydateretour-reservation.do">Up</a>
+					<a href="orderbydateretourinvert-reservation.do">Down</a></th>
 				<th colspan="2">Action</th>
 			</tr>
 
