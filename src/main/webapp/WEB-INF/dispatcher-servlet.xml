@@ -4,13 +4,15 @@
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
                            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
                            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
-                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<!-- pour utiliser les annotations dans les fichiers java -->
 	<context:annotation-config />
@@ -74,5 +76,37 @@
 		p:entityManagerFactory-ref="entityManagerFactory" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- pour la securité -->
+	<security:global-method-security
+		jsr250-annotations="enabled" />
+
+	<security:http>
+
+		<security:form-login login-page="/login.jsp"
+			default-target-url="/listerpersonne.do" />
+
+		<security:intercept-url pattern="/login.jsp"
+			filters="none" />
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+
+
+	</security:http>
+
+	<security:authentication-manager>
+		<!-- <security:authentication-provider> -->
+		<!-- <security:user-service> -->
+		<!-- <security:user name="admin" password="AQWZSX" authorities="ROLE_USER"/> -->
+		<!-- </security:user-service> -->
+		<!-- </security:authentication-provider> -->
+
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="Select nom as login, password, 'true' as enabled From users where nom=?"
+				authorities-by-username-query="Select nom, role from users u join roles r on r.userid=u.id where u.nom=? " />
+		</security:authentication-provider>
+
+	</security:authentication-manager>
 
 </beans>
