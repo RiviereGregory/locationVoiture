@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- pour les jstl pour utiliser foreach entre autre-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,9 +14,13 @@
 <title>Saisie voiture</title>
 </head>
 <body>
+	<fmt:bundle basename="messages" />
+
 	<!-- Dans le if la condition on la met ${ici } -->
 	<c:if test="${empty voiture.id}">
-		<h1 align="center">Saisie voiture</h1>
+		<h1 align="center">
+			<fmt:message key="saisie-voiture.titre" />
+		</h1>
 		<br />
 	</c:if>
 	<c:if test="${not empty voiture.id}">

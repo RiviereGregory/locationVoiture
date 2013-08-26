@@ -6,7 +6,7 @@
 <!-- pour les jstl pour utiliser foreach entre autre-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!-- Pour formater les date -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="dateFormat"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,13 +51,13 @@
 					<td>${reservation.client.id}</td>
 					<td>${reservation.voiture.id}</td>
 
-					<td><fmt:formatDate value="${reservation.dateReservation}"
-							pattern="dd/MM/yyyy" /></td>
+					<td><dateFormat:formatDate
+							value="${reservation.dateReservation}" pattern="dd/MM/yyyy" /></td>
 
-					<td><fmt:formatDate value="${reservation.datePriseVehicule}"
-							pattern="dd/MM/yyyy" /></td>
+					<td><dateFormat:formatDate
+							value="${reservation.datePriseVehicule}" pattern="dd/MM/yyyy" /></td>
 
-					<td><fmt:formatDate value="${reservation.dateRetour}"
+					<td><dateFormat:formatDate value="${reservation.dateRetour}"
 							pattern="dd/MM/yyyy" /></td>
 
 					<td><a href="modifier-reservation.do?id=${reservation.id}">Modifier

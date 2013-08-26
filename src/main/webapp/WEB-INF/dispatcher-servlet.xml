@@ -55,6 +55,20 @@
 		<property name="basename" value="messages" />
 	</bean>
 
+	<!-- pour utiliser la langue que l'on veut utiliser en parametre de l'url -->
+	<mvc:interceptors>
+		<bean id="localeChangeInterceptor"
+			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="lang" />
+		</bean>
+	</mvc:interceptors>
+	<!-- creer un cookie pour utiliser la langue -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="fr" />
+	</bean>
+
+
 	<!-- Pour gérer les transaction avec spring -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:entityManagerFactory-ref="entityManagerFactory" />
