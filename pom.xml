@@ -22,7 +22,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
-
+	<!-- Attention à l'ordre des dependency -->
 	<dependencies>
 
 		<!-- Spring all dependencies -->

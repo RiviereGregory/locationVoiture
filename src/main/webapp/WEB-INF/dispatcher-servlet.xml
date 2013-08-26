@@ -82,37 +82,37 @@
 	<security:global-method-security
 		jsr250-annotations="enabled" />
 
-	<security:http>
-		<security:form-login login-page="/login.jsp"
+	<security:http auto-config="true">
+		<!-- attention il faut mettre le chemin /pages avant le login pour le mapping -->
+		<security:form-login login-page="/pages/login.jsp"
 			default-target-url="/index.do" />
-		<security:intercept-url pattern="/login.jsp"
+		<security:intercept-url pattern="/pages/login.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-
-		<security:intercept-url pattern="/login.jsp" />
+		<security:intercept-url pattern="/pages/login-failure.jsp"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/pages/login.jsp" />
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
+	<!-- <security:form-login login-page="/pages/login.jsp" -->
+	<!-- authentication-failure-url="/pages/login-failure.jsp" /> -->
+
+		<!-- <security:form-login /> -->
 	</security:http>
 
-
-
 	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="admin" password="AQWZSX"
-					authorities="ROLE_USER" />
-			</security:user-service>
-		</security:authentication-provider>
+		<!-- <security:authentication-provider> -->
+		<!-- <security:user-service> -->
+		<!-- <security:user name="admin" password="admin" -->
+		<!-- authorities="ROLE_USER" /> -->
+		<!-- </security:user-service> -->
+		<!-- </security:authentication-provider> -->
 
 		<security:authentication-provider>
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
-				users-by-username-query="Select nom as login, password, 'true' as 
-			enabled From users where nom=?"
-				authorities-by-username-query="Select nom, role from users u join 
-			roles r on r.userid=u.id where u.nom=? " />
+				users-by-username-query="Select nom as login, password, enabled From users 
+			where nom=?"
+				authorities-by-username-query="Select nom, role from roles r where r.nom=? " />
 		</security:authentication-provider>
-
 	</security:authentication-manager>
-
-
 
 </beans>

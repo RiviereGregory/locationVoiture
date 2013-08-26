@@ -60,5 +60,8 @@
 		</p>
 	</form:form>
 	<br />
+	<br />
+	<a href="/location-voiture/j_spring_security_logout">Déconnexion</a>
+	<br />
 </body>
 </html>

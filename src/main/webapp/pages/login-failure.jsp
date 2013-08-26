@@ -8,7 +8,7 @@
 <title>Login</title>
 </head>
 <body>
-	<!-- attention au chemin de l'action -->
+	<h1>Erreur saisie</h1>
 	<form action="/location-voiture/j_spring_security_check" method="POST">
 		Login : <input type="text" name="j_username"> Password : <input
 			type="password" name="j_password"> <input type="submit"
