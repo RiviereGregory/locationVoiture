@@ -8,3 +8,10 @@ CREATE TABLE Reservation(id INTEGER NOT NULL AUTO_INCREMENT, datePriseVehicule D
 
 ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_Client_id FOREIGN KEY (client_id) REFERENCES Client (id);
 ALTER TABLE Reservation ADD CONSTRAINT fk_Reservation_VOITURE_id FOREIGN KEY (voiture_id_voiture) REFERENCES VOITURE (id_voiture);
+
+
+CREATE TABLE users (nom VARCHAR(255) NOT NULL , password VARCHAR(255),enabled BOOLEAN ,PRIMARY KEY (nom));
+CREATE TABLE roles (nom VARCHAR(255) NOT NULL , role VARCHAR(255),PRIMARY KEY (nom));
+
+INSERT INTO users (nom , password,enabled) VALUES ('user','user',true),('admin','admin',true);
+INSERT INTO roles (nom , role) VALUES ('user','ROLE_USER'),('admin','ROLE_ADMIN');
