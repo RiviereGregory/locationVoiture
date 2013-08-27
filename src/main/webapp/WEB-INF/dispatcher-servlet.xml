@@ -80,21 +80,30 @@
 
 	<!-- pour la securité -->
 	<security:global-method-security
-		jsr250-annotations="enabled" />
+		jsr250-annotations="enabled" secured-annotations="enabled" />
+
 
 	<security:http auto-config="true">
 		<!-- attention il faut mettre le chemin /pages avant le login pour le mapping -->
+
+		<!-- <security:form-login login-page="/pages/login.jsp" default-target-url="/index.do" 
+			/> -->
 		<security:form-login login-page="/pages/login.jsp"
-			default-target-url="/index.do" />
+			authentication-failure-url="/pages/login-failure.jsp" />
+
 		<security:intercept-url pattern="/pages/login.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
 		<security:intercept-url pattern="/pages/login-failure.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/pages/login.jsp" />
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
-	<!-- <security:form-login login-page="/pages/login.jsp" -->
-	<!-- authentication-failure-url="/pages/login-failure.jsp" /> -->
 
+		<!-- <security:intercept-url pattern="/pages/login.jsp" /> -->
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+
+		<!-- pour utiliser la deconnexion -->
+
+		<security:logout />
+		<!-- pour utiliser celui par defaut -->
 		<!-- <security:form-login /> -->
 	</security:http>
 

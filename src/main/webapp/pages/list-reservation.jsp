@@ -7,6 +7,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!-- Pour formater les date -->
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<!-- pour spring security -->
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,19 +54,21 @@
 					<td>${reservation.client.id}</td>
 					<td>${reservation.voiture.id}</td>
 
-					<td><fmt:formatDate
-							value="${reservation.dateReservation}" pattern="dd/MM/yyyy" /></td>
+					<td><fmt:formatDate value="${reservation.dateReservation}"
+							pattern="dd/MM/yyyy" /></td>
 
-					<td><fmt:formatDate
-							value="${reservation.datePriseVehicule}" pattern="dd/MM/yyyy" /></td>
+					<td><fmt:formatDate value="${reservation.datePriseVehicule}"
+							pattern="dd/MM/yyyy" /></td>
 
 					<td><fmt:formatDate value="${reservation.dateRetour}"
 							pattern="dd/MM/yyyy" /></td>
 
 					<td><a href="modifier-reservation.do?id=${reservation.id}">Modifier
 					</a></td>
-					<td><a href="supprimer-reservation.do?id=${reservation.id}">Supprimer
-					</a></td>
+					<security:authorize ifAllGranted="ROLE_ADMIN">
+						<td><a href="supprimer-reservation.do?id=${reservation.id}">Supprimer
+						</a></td>
+					</security:authorize>
 
 				</tr>
 			</c:forEach>
