@@ -11,13 +11,15 @@
 	prefix="security"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
-<style type="text/css">
+<!-- pour dire dans quel fichier selectionner l'internasionalisation -->
+<fmt:bundle basename="messages" />
 
-<%@ include file="/pages/style.css"%>
+<!-- pour utiliser le style css -->
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 
-</style>
 <!-- il ne faut pas mettre les balises pour que le fichier soit unique avec les includes -->
 
+<!-- Permet d'utiliser la config dans le fichier css -->
 <div id="header">
 	<p id="header">
 		<fmt:message key="header.titre" />

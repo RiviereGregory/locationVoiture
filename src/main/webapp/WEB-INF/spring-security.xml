@@ -15,42 +15,8 @@
                            http://www.springframework.org/schema/security 
                            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<!-- pour utiliser les annotations dans les fichiers java -->
-	<context:annotation-config />
-	<context:component-scan base-package="fr.treeptik" />
-	<!-- pour utiliser les annotations Spring MVC -->
-	<mvc:annotation-driven />
 
-	<!-- pour utiliser l'affichage web -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/pages/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<!-- pour configurer la connection à la base de donnée -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/locationvoiture" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
-	</bean>
-	<!-- Pour utiliser hibernate avec spring -->
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="fr.treeptik" />
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" value="true" />
-				<!--Mettre true pour etre en create/update et false pour validate -->
-				<property name="generateDdl" value="true" />
-				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
-			</bean>
-		</property>
-	</bean>
+	<import resource="dispatcher-servlet.xml" />
 
 	<!-- pour gerer les messages du hibernate validator dans un properties -->
 	<bean id="messageSource"
@@ -79,5 +45,51 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 
+	<!-- pour la securité -->
+	<security:global-method-security
+		jsr250-annotations="enabled" secured-annotations="enabled" />
+
+	<!-- pour aue la page ne soit pas sécurisé -->
+	<security:http pattern="/pages/login.jsp" security="none" />
+	<security:http pattern="/images/**" security="none" />
+	<security:http pattern="/css/**" security="none" />
+
+	<security:http>
+		<!-- attention il faut mettre le chemin /pages avant le login pour le mapping -->
+
+		<security:form-login login-page="/pages/login.jsp"
+			authentication-failure-url="/pages/login-failure.jsp" />
+
+		<!-- <security:form-login login-page="/pages/login.jsp" -->
+		<!-- default-target-url="/index.do" /> -->
+
+		<security:intercept-url pattern="/pages/login-failure.jsp"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<!-- <security:intercept-url pattern="/pages/login.jsp" /> -->
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+
+		<!-- pour utiliser la deconnexion -->
+		<security:logout />
+
+		<!-- pour utiliser celui par defaut -->
+		<!-- <security:form-login /> -->
+	</security:http>
+
+	<security:authentication-manager>
+		<!-- <security:authentication-provider> -->
+		<!-- <security:user-service> -->
+		<!-- <security:user name="admin" password="admin" -->
+		<!-- authorities="ROLE_USER" /> -->
+		<!-- </security:user-service> -->
+		<!-- </security:authentication-provider> -->
+
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="Select nom as login, password, enabled From users 
+			where nom=?"
+				authorities-by-username-query="Select nom, role from roles r where r.nom=? " />
+		</security:authentication-provider>
+	</security:authentication-manager>
 
 </beans>

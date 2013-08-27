@@ -17,7 +17,7 @@
 <body>
 	<!-- HEADER -->
 	<%@ include file="/pages/header.jsp"%>
-
+<fmt:bundle basename="messages" />
 	<!-- **** -->
 	<!-- attention au chemin de l'action -->
 	<form:form action="/location-voiture/j_spring_security_check"
@@ -34,7 +34,7 @@
 		<input type="password" name="j_password">
 		<br>
 		<input type="submit" value="<fmt:message key="login.button.submit"/>"> -->
-
+<fmt:message key="header.titre" />
 		<label for="username">Login:</label>
 		<input type="text" name="j_username">
 		<br>

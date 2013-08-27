@@ -22,6 +22,7 @@
 	<!-- **** -->
 
 	<h1 align="center">
+		<!-- 	permet d'utiliser l'internatinalisation avec les key -->
 		<fmt:message key="index.titre" />
 	</h1>
 	<br />
