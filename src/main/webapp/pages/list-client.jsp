@@ -21,7 +21,7 @@
 	<%@ include file="/pages/header.jsp"%>
 
 	<!-- **** -->
-	
+
 	<fmt:bundle basename="messages" />
 	<c:if test="${empty clients}">
 		<h1 align="center">

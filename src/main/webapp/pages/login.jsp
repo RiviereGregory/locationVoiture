@@ -15,13 +15,34 @@
 <title>Login</title>
 </head>
 <body>
+	<!-- HEADER -->
+	<%@ include file="/pages/header.jsp"%>
 
+	<!-- **** -->
 	<!-- attention au chemin de l'action -->
-	<form action="/location-voiture/j_spring_security_check" method="POST">
-		Login : <input type="text" name="j_username"> Password : <input
-			type="password" name="j_password"> <input type="submit"
-			value="Login">
-	</form>
+	<form:form action="/location-voiture/j_spring_security_check"
+		method="POST">
+		<!-- 		Login : <input type="text" name="j_username" /> -->
+		<!-- 		<br /> Password : <input type="password" name="j_password" /> -->
+		<!-- 		<br /> -->
+		<!-- 		<input type="submit" value="Login" /> -->
+
+		<!-- <label for="username"><fmt:message key="login.label.username" />:</label>
+		<input type="text" name="j_username">
+		<br>
+		<label for="password"><fmt:message key="login.label.password" />:</label>
+		<input type="password" name="j_password">
+		<br>
+		<input type="submit" value="<fmt:message key="login.button.submit"/>"> -->
+
+		<label for="username">Login:</label>
+		<input type="text" name="j_username">
+		<br>
+		<label for="password">Password:</label>
+		<input type="password" name="j_password">
+		<br>
+		<input type="submit" value="Login">
+	</form:form>
 </body>
 </html>
 

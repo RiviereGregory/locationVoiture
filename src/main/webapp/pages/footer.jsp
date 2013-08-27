@@ -7,17 +7,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
+<style type="text/css">
+<%@ include file="/pages/style.css"%>
+</style>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- il ne faut pas mettre les balises pour que le fichier soit unique avec les includes -->
+<!-- permet de faire un trait -->
+<div id="footer">
 
-</head>
-<body>
-	<!-- permet de faire un trait -->
 	<hr />
 	<h3>BAS DE PAGE</h3>
+	<p id="footer">
+		<img border="0" src="images/treeptik.jpg" alt="treeptik" width="100"
+			height="100">
+	</p>
+
 	<br />
-</body>
-</html>
+</div>

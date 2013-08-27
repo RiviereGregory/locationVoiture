@@ -1,0 +1,18 @@
+#header {
+	background: teal;
+	text-align: left;
+}
+
+p#header {
+	Font-Size: 32pt;
+	text-align: center;
+}
+
+#footer {
+	background: gray;
+	text-align: left;
+}
+
+p#footer {
+	text-align: center;
+}
