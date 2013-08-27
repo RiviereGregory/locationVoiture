@@ -15,20 +15,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Liste des voitures</title>
+<title><fmt:message key="list-voiture.titre.fenetre" /></title>
 </head>
 <body>
+	<!-- HEADER -->
+	<%@ include file="/pages/header.jsp"%>
+
+	<!-- **** -->
+	
+	<fmt:bundle basename="messages" />
 	<c:if test="${empty voitures}">
-		<h1 align="center">La liste des voitures est vide</h1>
+		<h1 align="center">
+			<fmt:message key="list-voiture.titre.vide" />
+		</h1>
 		<br />
 		<br />
 		<form:form action="voiture.do" commandName="voiture" method="GET"
 			align="center">
-			<input type="submit" value="Ajouter Voiture" />
+			<input type="submit"
+				value="<fmt:message key="bouton.ajoutervoiture" />" />
 		</form:form>
 	</c:if>
 	<c:if test="${not empty voitures}">
-		<h1 align="center">liste des voitures</h1>
+		<h1 align="center">
+			<fmt:message key="list-voiture.titre" />
+		</h1>
 		<br />
 		<p align="center">
 			<font color=red>${erreurVoitureReservation}</font>
@@ -36,14 +47,22 @@
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th>ID <a href="orderbyid-voiture.do">Up</a> <a
-					href="orderbyidinvert-voiture.do">Down</a></th>
-				<th>Marque<a href="orderbymarque-voiture.do">Up</a> <a
-					href="orderbymarqueinvert-voiture.do">Down</a></th>
-				<th>Modele<a href="orderbymodele-voiture.do">Up</a> <a
-					href="orderbymodeleinvert-voiture.do">Down</a></th>
-				<th>Date mise en circulation</th>
-				<th colspan="2">Action</th>
+				<th><fmt:message key="voiture.id" /> <a
+					href="orderbyid-voiture.do"><fmt:message key="bouton.trie.haut" /></a>
+					<a href="orderbyidinvert-voiture.do"><fmt:message
+							key="bouton.trie.bas" /></a></th>
+				<th><fmt:message key="voiture.marque" /><a
+					href="orderbymarque-voiture.do"><fmt:message
+							key="bouton.trie.haut" /></a> <a
+					href="orderbymarqueinvert-voiture.do"><fmt:message
+							key="bouton.trie.bas" /></a></th>
+				<th><fmt:message key="voiture.modele" /><a
+					href="orderbymodele-voiture.do"><fmt:message
+							key="bouton.trie.haut" /></a> <a
+					href="orderbymodeleinvert-voiture.do"><fmt:message
+							key="bouton.trie.bas" /></a></th>
+				<th><fmt:message key="voiture.date" /></th>
+				<th colspan="2"><fmt:message key="titre.action" /></th>
 			</tr>
 
 			<!-- Permet de faire une boucle sur la list voitures avec comme variable utilisable v -->
@@ -54,9 +73,11 @@
 					<td>${v.modele}</td>
 					<td><fmt:formatDate value="${v.dateMiseEnCirculation}"
 							pattern="dd/MM/yyyy" /></td>
-					<td><a href="modifier-voiture.do?id=${v.id}">Modifier </a></td>
+					<td><a href="modifier-voiture.do?id=${v.id}"><fmt:message
+								key="bouton.modifier" /></a></td>
 					<security:authorize ifAllGranted="ROLE_ADMIN">
-						<td><a href="supprimer-voiture.do?id=${v.id}">Supprimer </a></td>
+						<td><a href="supprimer-voiture.do?id=${v.id}"><fmt:message
+									key="bouton.supprimer" /></a></td>
 					</security:authorize>
 
 				</tr>
@@ -68,23 +89,30 @@
 			<tr>
 				<td><form:form action="voiture.do" commandName="voiture"
 						method="GET">
-						<input type="submit" value="Ajouter Voiture" />
+						<input type="submit"
+							value="<fmt:message	key="bouton.ajoutervoiture" />" />
 					</form:form></td>
 				<td><form:form action="clients.do" commandName="client"
 						method="GET">
-						<input type="submit" value="Liste des clients" />
+						<input type="submit"
+							value="<fmt:message	key="bouton.listclient" />" />
 					</form:form></td>
 				<td><form:form action="reservations.do"
 						commandName="reservation" method="GET">
-						<input type="submit" value="Liste des reservations" />
+						<input type="submit"
+							value="<fmt:message	key="bouton.listreservation" />" />
 					</form:form></td>
 			</tr>
 		</table>
 	</c:if>
 	<form:form action="index.do" commandName="index" method="GET">
 		<p align="center">
-			<input type="submit" value="SOMMAIRE" />
+			<input type="submit" value="<fmt:message key="bouton.sommaire" />" />
 		</p>
 	</form:form>
+	<!-- FOOTER -->
+	<%@ include file="/pages/footer.jsp"%>
+
+	<!-- **** -->
 </body>
 </html>

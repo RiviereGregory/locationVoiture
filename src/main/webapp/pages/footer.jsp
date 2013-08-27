@@ -12,16 +12,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+
 </head>
 <body>
-
-	<!-- attention au chemin de l'action -->
-	<form action="/location-voiture/j_spring_security_check" method="POST">
-		Login : <input type="text" name="j_username"> Password : <input
-			type="password" name="j_password"> <input type="submit"
-			value="Login">
-	</form>
+	<!-- permet de faire un trait -->
+	<hr />
+	<h3>BAS DE PAGE</h3>
+	<br />
 </body>
 </html>
-

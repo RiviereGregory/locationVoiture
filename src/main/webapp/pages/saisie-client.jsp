@@ -5,22 +5,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- pour les jstl pour utiliser foreach entre autre-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Saisie client</title>
+<title><fmt:message key="saisie-client.titre.fenetre" /></title>
 </head>
 <body>
+	<!-- HEADER -->
+	<%@ include file="/pages/header.jsp"%>
+
+	<!-- **** -->
+	
+	<fmt:bundle basename="messages" />
 	<!-- Dans le if la condition on la met ${ici } -->
 	<c:if test="${empty client.id}">
-		<h1 align="center">Saisie client</h1>
+		<h1 align="center">
+			<fmt:message key="saisie-client.titre" />
+		</h1>
 		<br />
 	</c:if>
 	<c:if test="${not empty client.id}">
-		<h1 align="center">Modifier client</h1>
+		<h1 align="center">
+			<fmt:message key="saisie-client.titre.modifier" />
+		</h1>
 		<br />
 	</c:if>
 
@@ -32,27 +43,32 @@
 		<form:hidden path="id" />
 		<table align="center">
 			<tr>
-				<td>Nom :</td>
+				<td><fmt:message key="client.nom" /> :</td>
 				<td><form:input path="nom" /> <form:errors path="nom" /></td>
 			</tr>
 			<tr>
-				<td>Prenom :</td>
+				<td><fmt:message key="client.prenom" /> :</td>
 				<td><form:input path="prenom" /> <form:errors path="prenom" /></td>
 			</tr>
 			<tr>
-				<td>Email :</td>
+				<td><fmt:message key="client.mail" /> :</td>
 				<td><form:input path="mail" placeholder="mail@domain.com" /> <form:errors
 						path="mail" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Valider" /></td>
+				<td colspan="2"><input type="submit"
+					value="<fmt:message key="bouton.valider" />" /></td>
 			</tr>
 		</table>
 	</form:form>
 	<form:form action="index.do" commandName="index" method="GET">
 		<p align="center">
-			<input type="submit" value="SOMMAIRE" />
+			<input type="submit" value="<fmt:message key="bouton.sommaire" />" />
 		</p>
 	</form:form>
+	<!-- FOOTER -->
+	<%@ include file="/pages/footer.jsp"%>
+
+	<!-- **** -->
 </body>
 </html>

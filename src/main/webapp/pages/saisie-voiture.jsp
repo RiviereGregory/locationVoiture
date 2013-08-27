@@ -11,9 +11,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Saisie voiture</title>
+<title><fmt:message key="saisie-voiture.titre.fenetre" /></title>
 </head>
 <body>
+	<!-- HEADER -->
+	<%@ include file="/pages/header.jsp"%>
+
+	<!-- **** -->
+
 	<fmt:bundle basename="messages" />
 
 	<!-- Dans le if la condition on la met ${ici } -->
@@ -24,7 +29,9 @@
 		<br />
 	</c:if>
 	<c:if test="${not empty voiture.id}">
-		<h1 align="center">Modifier voiture</h1>
+		<h1 align="center">
+			<fmt:message key="saisie-voiture.titre" />
+		</h1>
 		<br />
 	</c:if>
 
@@ -39,28 +46,34 @@
 
 
 			<tr>
-				<td>Marque :</td>
+				<td><fmt:message key="voiture.marque" /> :</td>
 				<td><form:input path="marque" /> <form:errors path="marque" /></td>
 			</tr>
 			<tr>
-				<td>Modele :</td>
+				<td><fmt:message key="voiture.modele" /> :</td>
 				<td><form:input path="modele" /> <form:errors path="modele" /></td>
 			</tr>
 			<tr>
-				<td>Date :</td>
+				<td><fmt:message key="voiture.date" /> :</td>
 				<td><form:input path="dateMiseEnCirculation"
 						placeholder="JJ/MM/AAAA" /> <form:errors
 						path="dateMiseEnCirculation" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Valider" /></td>
+				<td colspan="2"><input type="submit"
+					value="<fmt:message key="bouton.valider" />" /></td>
 			</tr>
 		</table>
 	</form:form>
 	<form:form action="index.do" commandName="index" method="GET">
 		<p align="center">
-			<input type="submit" value="SOMMAIRE" />
+			<input type="submit" value="<fmt:message key="bouton.sommaire" />" />
 		</p>
 	</form:form>
+
+	<!-- FOOTER -->
+	<%@ include file="/pages/footer.jsp"%>
+
+	<!-- **** -->
 </body>
 </html>
