@@ -8,7 +8,10 @@
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 
 <!-- pour utiliser le style css -->
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<style>
+<%@ include file="/css/style.css"%> 
+</style>
+<!-- <link rel="stylesheet" type="text/css" href="/css/style.css" /> -->
 <!-- il ne faut pas mettre les balises pour que le fichier soit unique avec les includes -->
 <!-- permet de faire un trait -->
 <div id="footer">
