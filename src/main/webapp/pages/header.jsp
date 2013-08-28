@@ -13,7 +13,10 @@
 
 <!-- pour dire dans quel fichier selectionner l'internasionalisation -->
 <fmt:bundle basename="messages" />
-
+<!-- pour utiliser le style css --> 
+<style> 
+<%@ include file="/css/style.css"%> 
+</style> 
 
 <!-- il ne faut pas mettre les balises pour que le fichier soit unique avec les includes -->
 
