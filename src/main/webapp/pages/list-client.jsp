@@ -40,7 +40,11 @@
 		</h1>
 		<br />
 		<p align="center">
-			<font color=red>${erreurClientReservation}</font>
+			<!-- 		Permet de tester si une erreur a été crée dans le messageSource et de l'afficher -->
+			<font color=red> <c:if test="${ERROR_DELETE != null}">
+					${ERROR_DELETE}
+				</c:if>
+			</font>
 		</p>
 		<br />
 		<table border="2" align="center">

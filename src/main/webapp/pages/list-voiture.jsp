@@ -22,7 +22,7 @@
 	<%@ include file="/pages/header.jsp"%>
 
 	<!-- **** -->
-	
+
 	<fmt:bundle basename="messages" />
 	<c:if test="${empty voitures}">
 		<h1 align="center">
@@ -42,7 +42,10 @@
 		</h1>
 		<br />
 		<p align="center">
-			<font color=red>${erreurVoitureReservation}</font>
+			<font color=red> <c:if test="${ERROR_DELETE_VOITURE != null}">
+					${ERROR_DELETE_VOITURE}
+				</c:if>
+			</font>
 		</p>
 		<br />
 		<table border="2" align="center">

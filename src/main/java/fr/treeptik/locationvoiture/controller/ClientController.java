@@ -3,17 +3,20 @@ package fr.treeptik.locationvoiture.controller;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Client;
@@ -30,6 +33,9 @@ public class ClientController {
 	private ReservationService reservationService;
 	@Autowired
 	private ClientValidator validator;
+
+	@Autowired
+	private MessageSource messageSource;
 
 	@RequestMapping(value = "/client.do", method = RequestMethod.GET)
 	public ModelAndView intiClient() {
@@ -107,8 +113,11 @@ public class ClientController {
 	}
 
 	@RequestMapping(value = "/supprimer-client.do", method = RequestMethod.GET)
-	public ModelAndView removeClient(@RequestParam("id") Integer id) {
-
+	public ModelAndView removeClient(@RequestParam("id") Integer id,
+			RedirectAttributes redirectAttributes, Locale locale) {
+		// il faut mettre RedirectAttributes redirectAttributes, Locale locale pour pouvoir
+		// internationalisé car BindingResult errors ne peut pas etre utilisé après un @RequestParam
+		
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -117,7 +126,10 @@ public class ClientController {
 				clientService.removeById(id);
 
 			} else {
-				params.put("erreurClientReservation", "Le client a une réservation");
+				// Le messageSource permet d'afficher le message internationaliser
+				params.put("ERROR_DELETE",
+						messageSource.getMessage("erreur.client.reservation", null, locale));
+
 			}
 
 			params.put("clients", clientService.findAll());

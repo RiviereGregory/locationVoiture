@@ -3,17 +3,20 @@ package fr.treeptik.locationvoiture.controller;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Voiture;
@@ -32,6 +35,9 @@ public class VoitureController {
 
 	@Autowired
 	private VoitureValidator validator;
+
+	@Autowired
+	private MessageSource messageSource;
 
 	// // Pour l'appeler dans une servlet
 	// // ici on sera dans localhost:8080/location-voiture/hello
@@ -129,7 +135,10 @@ public class VoitureController {
 	}
 
 	@RequestMapping(value = "/supprimer-voiture.do", method = RequestMethod.GET)
-	public ModelAndView removeVoiture(@RequestParam("id") Integer id) {
+	// il faut mettre RedirectAttributes redirectAttributes, Locale locale pour pouvoir
+	// internationalisé car BindingResult errors ne peut pas etre utilisé après un @RequestParam
+	public ModelAndView removeVoiture(@RequestParam("id") Integer id,
+			RedirectAttributes redirectAttributes, Locale locale) {
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -139,7 +148,10 @@ public class VoitureController {
 				voitureService.removeById(id);
 
 			} else {
-				params.put("erreurVoitureReservation", "La Voiture est réservée");
+				// params.put("erreurVoitureReservation", "La Voiture est réservée");
+				// Le messageSource permet d'afficher le message internationaliser
+				params.put("ERROR_DELETE_VOITURE",
+						messageSource.getMessage("erreur.voiture.reservation", null, locale));
 			}
 
 			params.put("voitures", voitureService.findAll());
