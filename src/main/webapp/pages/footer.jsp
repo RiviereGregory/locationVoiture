@@ -14,7 +14,7 @@
 <div id="footer">
 
 	<hr />
-	<h3>BAS DE PAGE</h3>
+	<h3>TREEPTIKCARS</h3>
 	<p id="footer">
 		<img border="0" src="images/treeptik.jpg" alt="treeptik" width="100"
 			height="100">

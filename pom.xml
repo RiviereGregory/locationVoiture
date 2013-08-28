@@ -13,6 +13,7 @@
 		<hibernate.validator>5.0.1.Final</hibernate.validator>
 		<spring.version>3.2.3.RELEASE</spring.version>
 		<spring.security>3.1.4.RELEASE</spring.security>
+		<aop.aspectj>1.7.3</aop.aspectj>
 		<junit.version>4.11</junit.version>
 		<dbcp.version>1.4</dbcp.version>
 		<jstl.version>1.2</jstl.version>
@@ -71,7 +72,17 @@
 			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aop.aspectj}</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aop.aspectj}</version>
+		</dependency>
 		<!-- Dépendance Hibernate (hibernate-core et hibernate-entitymanager) -->
 		<dependency>
 			<groupId>org.hibernate</groupId>

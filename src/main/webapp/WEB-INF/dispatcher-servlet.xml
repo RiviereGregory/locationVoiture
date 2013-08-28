@@ -5,6 +5,7 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -13,7 +14,8 @@
                            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
                            http://www.springframework.org/schema/security 
-                           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+                           http://www.springframework.org/schema/security/spring-security-3.1.xsd 
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<!-- pour utiliser les annotations dans les fichiers java -->
 	<context:annotation-config />
@@ -78,6 +80,25 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+	<!-- Bean qui contient le code qui serra exécuté cette conf peut être faite 
+		avec l'annotation @Component -->
+	<bean id="notifierAspect" class="fr.treeptik.locationvoiture.aspect.ConsoleNotifier" />
 
+	<!-- Conf AOP -->
+	<aop:config>
+
+		<!-- Définition du point d'interception (toutes les méthodes save de toutes 
+			les classes des services) -->
+		<aop:pointcut id="notifierPointcut"
+			expression="execution(* fr.treeptik.locationvoiture.service.*.save(..))" />
+
+		<!-- Appel des méthodes -->
+		<aop:aspect id="notifierAop" ref="notifierAspect">
+			<aop:after-returning pointcut-ref="notifierPointcut"
+				method="afterReturning" returning="result" />
+			<aop:before method="beforeSave" pointcut-ref="notifierPointcut" />
+		</aop:aspect>
+
+	</aop:config>
 
 </beans>

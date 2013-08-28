@@ -50,20 +50,20 @@
 		jsr250-annotations="enabled" secured-annotations="enabled" />
 
 	<!-- pour aue la page ne soit pas sécurisé -->
-	<security:http pattern="/pages/login.jsp" security="none" />
+	<security:http pattern="/login.jsp" security="none" />
 	<security:http pattern="/images/**" security="none" />
 	<security:http pattern="/css/**" security="none" />
 
 	<security:http>
 		<!-- attention il faut mettre le chemin /pages avant le login pour le mapping -->
 
-		<security:form-login login-page="/pages/login.jsp"
-			authentication-failure-url="/pages/login-failure.jsp" />
+		<security:form-login login-page="/login.jsp"
+			authentication-failure-url="/login-failure.jsp" />
 
 		<!-- <security:form-login login-page="/pages/login.jsp" -->
 		<!-- default-target-url="/index.do" /> -->
 
-		<security:intercept-url pattern="/pages/login-failure.jsp"
+		<security:intercept-url pattern="/login-failure.jsp"
 			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<!-- <security:intercept-url pattern="/pages/login.jsp" /> -->
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
