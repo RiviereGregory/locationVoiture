@@ -22,6 +22,8 @@
 		<version.maven.exec.plugin>1.2.1</version.maven.exec.plugin>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- <choix.conf.log4j>DEBUG</choix.conf.log4j> -->
 	</properties>
 
 	<!-- Attention à l'ordre des dependency -->
@@ -161,6 +163,31 @@
 
 	</dependencies>
 
+
+	<!-- permet d'avoir des profiles de configuration de compilation -->
+	<!-- clickdroit sur le projet propertie-> maven ->Active Maven Profiles 
+		->mettre le profil que l'on veut -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- pour utiliser la clef dans le fichier log4j.xml on met la variable -->
+				<choix.conf.log4j>DEBUG</choix.conf.log4j>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>prod</id>
+			<properties>
+				<!-- pour utiliser la clef dans le fichier log4j.xml on met la variable -->
+				<choix.conf.log4j>WARN</choix.conf.log4j>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -174,6 +201,16 @@
 			</plugin>
 		</plugins>
 
+		<resources>
+			<!-- pour regarder les fichiers que l'on a dans le dossier ressource -->
+			<!-- On peut utiliser les variable Maven dans tous les fichiers contenue 
+				dans les ressources grace à ${nom.variable} -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<!-- a mettre que si on utilise des variable $ dans les fichiers ressources -->
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 
