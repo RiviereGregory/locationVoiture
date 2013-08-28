@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -40,8 +41,13 @@ public class ReservationController {
 	@Autowired
 	private MessageSource messageSource;
 
+	// Permet de faire des logs dans le tomcat
+	private Logger logger = Logger.getLogger(ReservationController.class);
+
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
-	public ModelAndView intiReserv() {
+	public ModelAndView intReserv() {
+		// Affiche le log dans le niveau info
+		logger.info("Appel intReserv Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 		Reservation reservation = new Reservation();
 
@@ -63,7 +69,8 @@ public class ReservationController {
 
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.POST)
 	public ModelAndView saisieReservation(Reservation reservation) {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel saisieReservation Methode POST");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -72,6 +79,8 @@ public class ReservationController {
 			// params.put("clients", clientService.findAll());
 			params.put("clients", clientService.findAllOrderByNomPrenom());
 			params.put("reservation", reservation);
+			// Affiche le log dans le niveau debug
+			logger.debug(reservation);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -86,7 +95,10 @@ public class ReservationController {
 	@RequestMapping(value = "/reservations.do", method = RequestMethod.POST)
 	public ModelAndView saveReservation(@Valid Reservation reservation, BindingResult errors,
 			RedirectAttributes redirectAttributes, Locale locale) {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel saveReservation Methode POST");
+		// Affiche le log dans le niveau debug
+		logger.debug(reservation);
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -182,9 +194,12 @@ public class ReservationController {
 	// Permet de remettre a zéro les cases du formulaire de saisie
 	@RequestMapping(value = "/reset-reservation.do", method = RequestMethod.GET)
 	public ModelAndView resetReserv() {
+		// Affiche le log dans le niveau info
+		logger.info("Appel resetReserv Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 		Reservation reservation = new Reservation();
-
+		// Affiche le log dans le niveau debug
+		logger.debug(reservation);
 		try {
 			params.put("voitures", voitureService.findAllOrderByMarqueModele());
 			params.put("clients", clientService.findAllOrderByNomPrenom());
@@ -201,7 +216,8 @@ public class ReservationController {
 
 	@RequestMapping(value = "/reservations.do", method = RequestMethod.GET)
 	public ModelAndView afficheReservation() {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel afficheReservation Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -216,10 +232,14 @@ public class ReservationController {
 
 	@RequestMapping(value = "/modifier-reservation.do", method = RequestMethod.GET)
 	public ModelAndView updateReservation(@RequestParam("id") Integer id) {
+		// Affiche le log dans le niveau info
+		logger.info("Appel updateReservation Methode GET");
 		Reservation r = null;
 		Map<String, Object> params = new HashMap<String, Object>();
 		try {
 			r = reservationService.findById(id);
+			// Affiche le log dans le niveau debug
+			logger.debug(r);
 			// params.put("voitures", voitureService.findAll());
 			params.put("voitures", voitureService.findAllOrderByMarqueModele());
 			// params.put("clients", clientService.findAll());
@@ -235,7 +255,8 @@ public class ReservationController {
 
 	@RequestMapping(value = "/supprimer-reservation.do", method = RequestMethod.GET)
 	public ModelAndView removeReservation(@RequestParam("id") Integer id) {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel removeReservation Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -249,7 +270,8 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbydatereservation-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByDateReservation() {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel orderByDateReservation Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -263,7 +285,8 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbydatereservationinvert-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByDateReservationInvert() {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel orderByDateReservationInvert Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -279,6 +302,7 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbydateprisevehicule-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByDatePriseVehicule() {
+		logger.info("Appel orderByDatePriseVehicule Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -293,6 +317,7 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbydateprisevehiculeinvert-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByDatePriseVehiculeInvert() {
+		logger.info("Appel orderByDatePriseVehiculeInvert Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -309,6 +334,7 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbydateretour-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByDateRetour() {
+		logger.info("Appel orderByDateRetour Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -323,6 +349,7 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbydateretourinvert-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByDateRetourInvert() {
+		logger.info("Appel orderByDateRetourInvert Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -339,6 +366,7 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbyid-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdReservation() {
+		logger.info("Appel orderByIdReservation Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -353,6 +381,7 @@ public class ReservationController {
 
 	@RequestMapping(value = "/orderbyidinvert-reservation.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdInvertReservation() {
+		logger.info("Appel orderByIdInvertReservation Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 

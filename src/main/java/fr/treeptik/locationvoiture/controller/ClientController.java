@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -37,9 +38,12 @@ public class ClientController {
 	@Autowired
 	private MessageSource messageSource;
 
+	private Logger logger = Logger.getLogger(ClientController.class);
+
 	@RequestMapping(value = "/client.do", method = RequestMethod.GET)
 	public ModelAndView intiClient() {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel intiClient Methode GET");
 		Client c = new Client();
 
 		ModelAndView modelAndView = new ModelAndView("saisie-client", "client", c);
@@ -50,7 +54,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/client.do", method = RequestMethod.POST)
 	public ModelAndView saisieClient(Client client) {
-
+		logger.info("Appel saisieClient Methode POST");
 		System.out.println("client id : " + client.getId());
 
 		return new ModelAndView("saisie-client", "client", client);
@@ -59,6 +63,8 @@ public class ClientController {
 
 	@RequestMapping(value = "/clients.do", method = RequestMethod.POST)
 	public ModelAndView saveClient(@Valid Client client, BindingResult errors) {
+		logger.info("Appel saveClient Methode POST");
+
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		if (errors.hasErrors()) {
@@ -86,6 +92,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/clients.do", method = RequestMethod.GET)
 	public ModelAndView afficheClient() {
+		logger.info("Appel afficheClient Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -101,10 +108,13 @@ public class ClientController {
 
 	@RequestMapping(value = "/modifier-client.do", method = RequestMethod.GET)
 	public ModelAndView updateClient(@RequestParam("id") Integer id) {
+		// Affiche le log dans le niveau info
+		logger.info("Appel updateClient Methode GET");
 		Client c = null;
 		try {
 			c = clientService.findById(id);
-
+			// Affiche le log dans le niveau debug
+			logger.debug(c);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -117,7 +127,7 @@ public class ClientController {
 			RedirectAttributes redirectAttributes, Locale locale) {
 		// il faut mettre RedirectAttributes redirectAttributes, Locale locale pour pouvoir
 		// internationalisé car BindingResult errors ne peut pas etre utilisé après un @RequestParam
-		
+		logger.info("Appel removeClient Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -144,7 +154,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/orderbyid-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdClient() {
-
+		logger.info("Appel orderByIdClient Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -158,7 +168,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/orderbyidinvert-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdInvertClient() {
-
+		logger.info("Appel orderByIdInvertClient Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -174,7 +184,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/orderbynom-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdNomPrenomClient() {
-
+		logger.info("Appel orderByIdNomPrenomClient Methode GET");
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		try {
@@ -188,6 +198,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/orderbynominvert-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdNomPrenomInvertClient() {
+		logger.info("Appel orderByIdNomPrenomInvertClient Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -204,6 +215,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/orderbyprenom-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdPrenomNomClient() {
+		logger.info("Appel orderByIdPrenomNomClient Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -218,6 +230,7 @@ public class ClientController {
 
 	@RequestMapping(value = "/orderbyprenominvert-client.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdPrenomNomInvertClient() {
+		logger.info("Appel orderByIdPrenomNomInvertClient Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 

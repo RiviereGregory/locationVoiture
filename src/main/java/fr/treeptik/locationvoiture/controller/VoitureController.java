@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,8 @@ public class VoitureController {
 
 	@Autowired
 	private MessageSource messageSource;
+	// Permet de faire des logs dans le tomcat
+	private Logger logger = Logger.getLogger(VoitureController.class);
 
 	// // Pour l'appeler dans une servlet
 	// // ici on sera dans localhost:8080/location-voiture/hello
@@ -49,7 +52,8 @@ public class VoitureController {
 	// il faut mettre .do pour quelle passe par le controlleur
 	@RequestMapping(value = "/voiture.do", method = RequestMethod.GET)
 	public ModelAndView intiForm() {
-
+		// Affiche le log dans le niveau info
+		logger.info("Appel intiForm Methode GET");
 		// Création d'un objet voiture qui va etre rempli par le formulaire
 		Voiture v = new Voiture();
 
@@ -64,7 +68,8 @@ public class VoitureController {
 
 	@RequestMapping(value = "/voiture.do", method = RequestMethod.POST)
 	public ModelAndView saisieVoiture(Voiture voiture) {
-
+		logger.info("Appel saisieVoiture Methode POST");
+		logger.debug(voiture);
 		System.out.println("Voiture marque : " + voiture.getMarque());
 
 		return new ModelAndView("afficher-voiture", "voiture", voiture);
@@ -75,6 +80,8 @@ public class VoitureController {
 	// @valid permet de valider l'objet s'il y a des erreurs elles sont mise dans l'objet errors de
 	// type BindingResult
 	public ModelAndView saveVoitures(@Valid Voiture voiture, BindingResult errors) {
+		logger.info("Appel saveVoitures Methode POST");
+		logger.debug(voiture);
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		if (errors.hasErrors()) {
@@ -105,6 +112,7 @@ public class VoitureController {
 
 	@RequestMapping(value = "/voitures.do", method = RequestMethod.GET)
 	public ModelAndView findAllVoitures() {
+		logger.info("Appel findAllVoitures Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -123,10 +131,13 @@ public class VoitureController {
 
 	@RequestMapping(value = "/modifier-voiture.do", method = RequestMethod.GET)
 	public ModelAndView updateVoiture(@RequestParam("id") Integer id) {
+		logger.info("Appel updateVoiture Methode GET");
+		logger.debug(id);
+
 		Voiture v = null;
 		try {
 			v = voitureService.findById(id);
-
+			logger.debug(v);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -139,6 +150,8 @@ public class VoitureController {
 	// internationalisé car BindingResult errors ne peut pas etre utilisé après un @RequestParam
 	public ModelAndView removeVoiture(@RequestParam("id") Integer id,
 			RedirectAttributes redirectAttributes, Locale locale) {
+		logger.info("Appel removeVoiture Methode GET");
+		logger.debug(id);
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -156,6 +169,8 @@ public class VoitureController {
 
 			params.put("voitures", voitureService.findAll());
 		} catch (ServiceException e) {
+			// Permet de logger les erreurs
+			logger.error(id, e);
 			e.printStackTrace();
 		}
 		return new ModelAndView("list-voiture", params);
@@ -164,6 +179,7 @@ public class VoitureController {
 
 	@RequestMapping(value = "/orderbyid-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdVoiture() {
+		logger.info("Appel orderByIdVoiture Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -178,6 +194,7 @@ public class VoitureController {
 
 	@RequestMapping(value = "/orderbyidinvert-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByIdInvertVoiture() {
+		logger.info("Appel orderByIdInvertVoiture Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -194,6 +211,7 @@ public class VoitureController {
 
 	@RequestMapping(value = "/orderbymarque-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByMarqueVoiture() {
+		logger.info("Appel orderByMarqueVoiture Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -208,6 +226,7 @@ public class VoitureController {
 
 	@RequestMapping(value = "/orderbymarqueinvert-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByMarqueInvertVoiture() {
+		logger.info("Appel orderByMarqueInvertVoiture Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -224,6 +243,7 @@ public class VoitureController {
 
 	@RequestMapping(value = "/orderbymodele-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByModeleVoiture() {
+		logger.info("Appel orderByModeleVoiture Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -238,6 +258,7 @@ public class VoitureController {
 
 	@RequestMapping(value = "/orderbymodeleinvert-voiture.do", method = RequestMethod.GET)
 	public ModelAndView orderByModeleInvertVoiture() {
+		logger.info("Appel orderByModeleInvertVoiture Methode GET");
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
