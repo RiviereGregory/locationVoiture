@@ -10,12 +10,13 @@
 <!-- pour spring security -->
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><fmt:message key="list-reservation.titre.fenetre" /></title>
+<title><spring:message code="list-reservation.titre.fenetre" /></title>
 </head>
 <body>
 	<!-- HEADER -->
@@ -25,46 +26,46 @@
 	
 	<c:if test="${empty reservations}">
 		<h1 align="center">
-			<fmt:message key="list-reservation.titre.vide" />
+			<spring:message code="list-reservation.titre.vide" />
 		</h1>
 		<br />
 		<br />
 		<form:form action="reservation.do" commandName="reservation"
 			method="GET" align="center">
 			<input type="submit"
-				value="<fmt:message key="bouton.ajouterreservation" />" />
+				value="<spring:message code="bouton.ajouterreservation" />" />
 		</form:form>
 	</c:if>
 	<c:if test="${not empty reservations}">
 		<h1 align="center">
-			<fmt:message key="list-reservation.titre" />
+			<spring:message code="list-reservation.titre" />
 		</h1>
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th><fmt:message key="reservation.id" /> <a
+				<th><spring:message code="reservation.id" /> <a
 					href="orderbyid-reservation.do"><fmt:message
 							key="bouton.trie.haut" /></a> <a
 					href="orderbyidinvert-reservation.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="reservation.client.id" /></th>
-				<th><fmt:message key="reservation.voiture.id" /></th>
-				<th><fmt:message key="reservation.date.reservation" /> <a
+				<th><spring:message code="reservation.client.id" /></th>
+				<th><spring:message code="reservation.voiture.id" /></th>
+				<th><spring:message code="reservation.date.reservation" /> <a
 					href="orderbydatereservation-reservation.do"><fmt:message
 							key="bouton.trie.haut" /></a> <a
 					href="orderbydatereservationinvert-reservation.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="reservation.date.prisevehicule" /> <a
+				<th><spring:message code="reservation.date.prisevehicule" /> <a
 					href="orderbydateprisevehicule-reservation.do"><fmt:message
 							key="bouton.trie.haut" /></a> <a
 					href="orderbydateprisevehiculeinvert-reservation.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="reservation.date.retour" /> <a
+				<th><spring:message code="reservation.date.retour" /> <a
 					href="orderbydateretour-reservation.do"><fmt:message
 							key="bouton.trie.haut" /></a> <a
 					href="orderbydateretourinvert-reservation.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th colspan="2"><fmt:message key="titre.action" /></th>
+				<th colspan="2"><spring:message code="titre.action" /></th>
 			</tr>
 
 			<!-- Permet de faire une boucle sur la list voitures avec comme variable utilisable v -->
@@ -100,12 +101,12 @@
 				<td><form:form action="reservation.do"
 						commandName="reservation" method="GET">
 						<input type="submit"
-							value="<fmt:message key="bouton.ajouterreservation" />" />
+							value="<spring:message code="bouton.ajouterreservation" />" />
 					</form:form></td>
 				<td><form:form action="voitures.do" commandName="voiture"
 						method="GET">
 						<input type="submit"
-							value="<fmt:message key="bouton.listvoiture" />" />
+							value="<spring:message code="bouton.listvoiture" />" />
 					</form:form></td>
 				<td><form:form action="clients.do" commandName="client"
 						method="GET">

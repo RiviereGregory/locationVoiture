@@ -7,12 +7,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><fmt:message key="saisie-reservation.titre.fenetre" /></title>
+<title><spring:message code="saisie-reservation.titre.fenetre" /></title>
 </head>
 <body>
 	<!-- HEADER -->
@@ -23,13 +24,13 @@
 	<!-- Dans le if la condition on la met ${ici } -->
 	<c:if test="${empty reservation.id}">
 		<h1 align="center">
-			<fmt:message key="saisie-reservation.titre" />
+			<spring:message code="saisie-reservation.titre" />
 		</h1>
 		<br />
 	</c:if>
 	<c:if test="${not empty reservation.id}">
 		<h1 align="center">
-			<fmt:message key="saisie-reservation.titre.modifier" />
+			<spring:message code="saisie-reservation.titre.modifier" />
 		</h1>
 		<br />
 	</c:if>
@@ -49,7 +50,7 @@
 		<table align="center">
 			<tr>
 
-				<td><fmt:message key="reservation.voiture" /> :</td>
+				<td><spring:message code="reservation.voiture" /> :</td>
 				<!-- 				Pour mettre le id de la voiture dans la reservation -->
 				<td><form:select path="voiture.id">
 						<c:forEach items="${voitures}" var="v">
@@ -62,7 +63,7 @@
 
 			<tr>
 
-				<td><fmt:message key="reservation.client" /> :</td>
+				<td><spring:message code="reservation.client" /> :</td>
 				<td><form:select path="client.id">
 						<c:forEach items="${clients}" var="c">
 							<form:option value="${c.id}">${c.nom} ${c.prenom} </form:option>
@@ -72,24 +73,24 @@
 
 			</tr>
 			<tr>
-				<td><fmt:message key="reservation.date.reservation" /> :</td>
+				<td><spring:message code="reservation.date.reservation" /> :</td>
 				<!-- 				Le placeholder="DD/MM/YYYY" permet de mettre le modele dans la case -->
 				<td><form:input path="dateReservation" placeholder="JJ/MM/AAAA" />
 					<form:errors path="dateReservation" /></td>
 			</tr>
 			<tr>
-				<td><fmt:message key="reservation.date.prisevehicule" /> :</td>
+				<td><spring:message code="reservation.date.prisevehicule" /> :</td>
 				<td><form:input path="datePriseVehicule"
 						placeholder="JJ/MM/AAAA" /> <form:errors path="datePriseVehicule" /></td>
 			</tr>
 			<tr>
-				<td><fmt:message key="reservation.date.retour" /> :</td>
+				<td><spring:message code="reservation.date.retour" /> :</td>
 				<td><form:input path="dateRetour" placeholder="JJ/MM/AAAA" />
 					<form:errors path="dateRetour" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit"
-					value="<fmt:message key="bouton.valider" />" /></td>
+					value="<spring:message code="bouton.valider" />" /></td>
 			</tr>
 		</table>
 	</form:form>
@@ -97,12 +98,12 @@
 		<tr>
 			<td><form:form action="reset-reservation.do" commandName="reset"
 					method="GET">
-					<input type="submit" value="<fmt:message key="bouton.reset" />" />
+					<input type="submit" value="<spring:message code="bouton.reset" />" />
 				</form:form></td>
 
 			<td><form:form action="index.do" commandName="index"
 					method="GET">
-					<input type="submit" value="<fmt:message key="bouton.sommaire" />" />
+					<input type="submit" value="<spring:message code="bouton.sommaire" />" />
 				</form:form></td>
 		</tr>
 	</table>

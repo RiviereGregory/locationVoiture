@@ -6,6 +6,7 @@
 <!-- pour les jstl pour utiliser foreach entre autre-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!-- pour utiliser le style css -->
 <!-- <link rel="stylesheet" type="text/css" href="/css/style.css" /> -->

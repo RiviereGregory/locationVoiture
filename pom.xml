@@ -14,6 +14,7 @@
 		<spring.version>3.2.3.RELEASE</spring.version>
 		<spring.security>3.1.4.RELEASE</spring.security>
 		<aop.aspectj>1.7.3</aop.aspectj>
+		<log4j.version>1.2.17</log4j.version>
 		<junit.version>4.11</junit.version>
 		<dbcp.version>1.4</dbcp.version>
 		<jstl.version>1.2</jstl.version>
@@ -150,6 +151,14 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${spring.security}</version>
 		</dependency>
+
+		<!-- Log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

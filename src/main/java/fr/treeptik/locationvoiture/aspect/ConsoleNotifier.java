@@ -1,22 +1,25 @@
 package fr.treeptik.locationvoiture.aspect;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.JoinPoint.StaticPart;
 
-import fr.treeptik.locationvoiture.model.Client;
-
 public class ConsoleNotifier {
 	public void afterReturning(StaticPart staticPart, Object result) {
+		try {
+			Method[] methods = result.getClass().getMethods();
+			for (Method method : methods) {
+				if (method.getName().startsWith("get")) {
 
-		System.out.println("Point cut : " + staticPart.toShortString());
-		System.out.println("Object saved : " + result.getClass().getName());
+					System.out.println("++ " + method.getName() + " " + method.invoke(result));
 
-		if (result instanceof Client) {
-			// Client c = (Client) result;
-			System.out.println("C'est un client");
+				}
+			}
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
 		}
-
-		System.out.println("Message send ");
 
 	}
 

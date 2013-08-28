@@ -9,12 +9,13 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><fmt:message key="list-client.titre.fenetre" /></title>
+<title><spring:message code="list-client.titre.fenetre" /></title>
 </head>
 <body>
 	<!-- HEADER -->
@@ -25,18 +26,18 @@
 	<fmt:bundle basename="messages" />
 	<c:if test="${empty clients}">
 		<h1 align="center">
-			<fmt:message key="list-client.titre.vide" />
+			<spring:message code="list-client.titre.vide" />
 		</h1>
 		<br />
 		<br />
 		<form:form action="client.do" commandName="client" method="GET"
 			align="center">
-			<input type="submit" value="<fmt:message key="bouton.client" />" />
+			<input type="submit" value="<spring:message code="bouton.client" />" />
 		</form:form>
 	</c:if>
 	<c:if test="${not empty clients}">
 		<h1 align="center">
-			<fmt:message key="list-client.titre" />
+			<spring:message code="list-client.titre" />
 		</h1>
 		<br />
 		<p align="center">
@@ -49,21 +50,21 @@
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th><fmt:message key="client.id" /> <a
-					href="orderbyid-client.do"><fmt:message key="bouton.trie.haut" /></a>
+				<th><spring:message code="client.id" /> <a
+					href="orderbyid-client.do"><spring:message code="bouton.trie.haut" /></a>
 					<a href="orderbyidinvert-client.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="client.nom" /> <a
-					href="orderbynom-client.do"><fmt:message key="bouton.trie.haut" /></a>
+				<th><spring:message code="client.nom" /> <a
+					href="orderbynom-client.do"><spring:message code="bouton.trie.haut" /></a>
 					<a href="orderbynominvert-client.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="client.prenom" /><a
+				<th><spring:message code="client.prenom" /><a
 					href="orderbyprenom-client.do"><fmt:message
 							key="bouton.trie.haut" /></a> <a
 					href="orderbyprenominvert-client.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="client.mail" /></th>
-				<th colspan="2"><fmt:message key="titre.action" /></th>
+				<th><spring:message code="client.mail" /></th>
+				<th colspan="2"><spring:message code="titre.action" /></th>
 			</tr>
 
 			<!-- Permet de faire une boucle sur la list voitures avec comme variable utilisable v -->

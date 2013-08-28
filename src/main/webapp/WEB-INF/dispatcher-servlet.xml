@@ -73,12 +73,82 @@
 		<property name="defaultLocale" value="fr" />
 	</bean>
 
+	<!-- pour utiliser la langue que l'on veut utiliser en parametre de l'url 
+		a la place de mvc:interceptor -->
+
+	<!-- <bean id="localeChangeInterceptor" -->
+	<!-- class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"> -->
+	<!-- <property name="paramName" value="lang" /> -->
+	<!-- </bean> -->
+	<!-- creer un cookie pour utiliser la langue -->
+
+	<!-- <bean id="localeResolver" -->
+	<!-- class="org.springframework.web.servlet.i18n.CookieLocaleResolver"> -->
+	<!-- <property name="defaultLocale" value="fr" /> -->
+	<!-- </bean> -->
+	<!-- redirige l'interceptor -->
+	<!-- <bean id="handlerMapping" -->
+	<!-- class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"> -->
+	<!-- <property name="interceptors"> -->
+	<!-- <ref bean="localeChangeInterceptor" /> -->
+	<!-- </property> -->
+	<!-- </bean> -->
 
 	<!-- Pour gérer les transaction avec spring -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
 		p:entityManagerFactory-ref="entityManagerFactory" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- pour la securité -->
+	<security:global-method-security
+		jsr250-annotations="enabled" secured-annotations="enabled" />
+
+	<!-- pour que la page ne soit pas sécurisé -->
+	<security:http pattern="/login.jsp" security="none" />
+	<security:http pattern="/images/**" security="none" />
+	<security:http pattern="/css/**" security="none" />
+
+	<security:http>
+		<!-- attention il faut mettre le chemin /pages avant le login pour le mapping 
+			s'il n'est pas à la racine de webapps -->
+
+		<security:form-login login-page="/login.jsp"
+			authentication-failure-url="/login-failure.jsp" />
+
+		<!-- <security:form-login login-page="/pages/login.jsp" -->
+		<!-- default-target-url="/index.do" /> -->
+
+		<security:intercept-url pattern="/login-failure.jsp"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<!-- <security:intercept-url pattern="/pages/login.jsp" /> -->
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+
+		<!-- pour utiliser la deconnexion -->
+		<security:logout />
+
+		<!-- pour utiliser celui par defaut -->
+		<!-- <security:form-login /> -->
+	</security:http>
+
+	<security:authentication-manager>
+		<!-- <security:authentication-provider> -->
+		<!-- <security:user-service> -->
+		<!-- <security:user name="admin" password="admin" -->
+		<!-- authorities="ROLE_USER" /> -->
+		<!-- </security:user-service> -->
+		<!-- </security:authentication-provider> -->
+
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="Select nom as login, password, enabled From users 
+			where nom=?"
+				authorities-by-username-query="Select nom, role from roles r where r.nom=? " />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+
 
 	<!-- Bean qui contient le code qui serra exécuté cette conf peut être faite 
 		avec l'annotation @Component -->

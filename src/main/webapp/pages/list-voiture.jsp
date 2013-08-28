@@ -10,12 +10,13 @@
 <!-- pour spring security -->
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title><fmt:message key="list-voiture.titre.fenetre" /></title>
+<title><spring:message code="list-voiture.titre.fenetre" /></title>
 </head>
 <body>
 	<!-- HEADER -->
@@ -26,19 +27,19 @@
 	<fmt:bundle basename="messages" />
 	<c:if test="${empty voitures}">
 		<h1 align="center">
-			<fmt:message key="list-voiture.titre.vide" />
+			<spring:message code="list-voiture.titre.vide" />
 		</h1>
 		<br />
 		<br />
 		<form:form action="voiture.do" commandName="voiture" method="GET"
 			align="center">
 			<input type="submit"
-				value="<fmt:message key="bouton.ajoutervoiture" />" />
+				value="<spring:message code="bouton.ajoutervoiture" />" />
 		</form:form>
 	</c:if>
 	<c:if test="${not empty voitures}">
 		<h1 align="center">
-			<fmt:message key="list-voiture.titre" />
+			<spring:message code="list-voiture.titre" />
 		</h1>
 		<br />
 		<p align="center">
@@ -50,22 +51,22 @@
 		<br />
 		<table border="2" align="center">
 			<tr>
-				<th><fmt:message key="voiture.id" /> <a
-					href="orderbyid-voiture.do"><fmt:message key="bouton.trie.haut" /></a>
+				<th><spring:message code="voiture.id" /> <a
+					href="orderbyid-voiture.do"><spring:message code="bouton.trie.haut" /></a>
 					<a href="orderbyidinvert-voiture.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="voiture.marque" /><a
+				<th><spring:message code="voiture.marque" /><a
 					href="orderbymarque-voiture.do"><fmt:message
 							key="bouton.trie.haut" /></a> <a
 					href="orderbymarqueinvert-voiture.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="voiture.modele" /><a
+				<th><spring:message code="voiture.modele" /><a
 					href="orderbymodele-voiture.do"><fmt:message
 							key="bouton.trie.haut" /></a> <a
 					href="orderbymodeleinvert-voiture.do"><fmt:message
 							key="bouton.trie.bas" /></a></th>
-				<th><fmt:message key="voiture.date" /></th>
-				<th colspan="2"><fmt:message key="titre.action" /></th>
+				<th><spring:message code="voiture.date" /></th>
+				<th colspan="2"><spring:message code="titre.action" /></th>
 			</tr>
 
 			<!-- Permet de faire une boucle sur la list voitures avec comme variable utilisable v -->
@@ -110,7 +111,7 @@
 	</c:if>
 	<form:form action="index.do" commandName="index" method="GET">
 		<p align="center">
-			<input type="submit" value="<fmt:message key="bouton.sommaire" />" />
+			<input type="submit" value="<spring:message code="bouton.sommaire" />" />
 		</p>
 	</form:form>
 	<!-- FOOTER -->
