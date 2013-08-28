@@ -3,17 +3,20 @@ package fr.treeptik.locationvoiture.controller;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.treeptik.locationvoiture.exception.ServiceException;
 import fr.treeptik.locationvoiture.model.Reservation;
@@ -34,6 +37,8 @@ public class ReservationController {
 	private ClientService clientService;
 	@Autowired
 	private ReservationValidator validator;
+	@Autowired
+	private MessageSource messageSource;
 
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
 	public ModelAndView intiReserv() {
@@ -79,7 +84,8 @@ public class ReservationController {
 	}
 
 	@RequestMapping(value = "/reservations.do", method = RequestMethod.POST)
-	public ModelAndView saveReservation(@Valid Reservation reservation, BindingResult errors) {
+	public ModelAndView saveReservation(@Valid Reservation reservation, BindingResult errors,
+			RedirectAttributes redirectAttributes, Locale locale) {
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
@@ -115,7 +121,9 @@ public class ReservationController {
 				params.put("voitures", voitureLibre(reservation));
 				params.put("clients", clientService.findAllOrderByNomPrenom());
 				params.put("reservation", reservation);
-				params.put("erreurChoixVoiture", "voiture non disponible");
+
+				params.put("ERROR_CHOIX_VOITURE",
+						messageSource.getMessage("erreur.choix.voiture", null, locale));
 
 				return new ModelAndView("saisie-reservation", params);
 

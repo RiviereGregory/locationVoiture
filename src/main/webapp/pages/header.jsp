@@ -13,10 +13,10 @@
 
 <!-- pour dire dans quel fichier selectionner l'internasionalisation -->
 <fmt:bundle basename="messages" />
-<!-- pour utiliser le style css --> 
-<style> 
-<%@ include file="/css/style.css"%> 
-</style> 
+<!-- pour utiliser le style css -->
+<style>
+<%@ include file="/css/style.css"%>
+</style>
 
 <!-- il ne faut pas mettre les balises pour que le fichier soit unique avec les includes -->
 
@@ -26,7 +26,11 @@
 		<fmt:message key="header.titre" />
 	</p>
 	<a href="/location-voiture/j_spring_security_logout"><fmt:message
-			key="bouton.deconnexion" /></a> <br /> <br /> <br />
+			key="bouton.deconnexion" /></a> <br /> <span style="float: right">
+		<a href="?lang=en">en <img border="0" src="images/en.gif" alt="en"
+			width="20" height="15"></a> | <a href="?lang=fr">fr <img
+			border="0" src="images/fr.gif" alt="fr" width="20" height="15"></a>
+	</span> <br /> <br />
 	<!-- permet de faire un trait -->
 
 	<hr />

@@ -19,7 +19,7 @@
 	<%@ include file="/pages/header.jsp"%>
 
 	<!-- **** -->
-	
+
 	<!-- Dans le if la condition on la met ${ici } -->
 	<c:if test="${empty reservation.id}">
 		<h1 align="center">
@@ -35,7 +35,10 @@
 	</c:if>
 	<br />
 	<p align="center">
-		<font color=red>${erreurChoixVoiture}</font>
+		<font color=red> <c:if test="${ERROR_CHOIX_VOITURE != null}">
+		${ERROR_CHOIX_VOITURE} 
+		</c:if>
+		</font>
 	</p>
 	<br />
 	<!--  action page sur laquelle il va lorsque l'on appui sur valider -->
