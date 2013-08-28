@@ -153,6 +153,7 @@
 	<!-- Bean qui contient le code qui serra exécuté cette conf peut être faite 
 		avec l'annotation @Component -->
 	<bean id="notifierAspect" class="fr.treeptik.locationvoiture.aspect.ConsoleNotifier" />
+	<bean id="logAspect" class="fr.treeptik.locationvoiture.aspect.LogNotifier" />
 
 	<!-- Conf AOP -->
 	<aop:config>
@@ -169,6 +170,19 @@
 			<aop:before method="beforeSave" pointcut-ref="notifierPointcut" />
 		</aop:aspect>
 
+	</aop:config>
+
+	<!-- Conf AOP -->
+	<aop:config>
+		<!-- Définition du point d'interception (toutes les méthodes save de toutes 
+			les classes des services) -->
+		<aop:pointcut id="logPointcut"
+			expression="execution(* fr.treeptik.locationvoiture.controller.*.*(..))" />
+		<!-- Appel des méthodes -->
+		<aop:aspect id="logAop" ref="logAspect">
+			<aop:after-returning pointcut-ref="logPointcut"
+				method="afterReturning" returning="result" />
+		</aop:aspect>
 	</aop:config>
 
 </beans>
