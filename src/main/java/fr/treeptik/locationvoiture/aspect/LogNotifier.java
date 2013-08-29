@@ -74,13 +74,28 @@ public class LogNotifier {
 	}
 
 	public void beforeSaveService(JoinPoint joinPoint) {
+		logger = Logger.getLogger(joinPoint.getSignature().getDeclaringTypeName());
+		System.out.println("Avant service  ");
+		String serviceMethod = joinPoint.getSignature().getName();
+		System.out.println("joinPoint get Name : " + serviceMethod);
+		System.out.println("joinPoint get  Target: " + joinPoint.getTarget());
+		for (Object arg : joinPoint.getArgs()) {
 
-		System.out.println("Avant save  ");
+			System.out.println("joinPoint get Args : " + arg);
+		}
 
 	}
-	public void beforeSaveController(JoinPoint joinPoint) {
 
-		System.out.println("Avant save  ");
+	public void beforeSaveController(JoinPoint joinPoint) {
+		logger = Logger.getLogger(joinPoint.getSignature().getDeclaringTypeName());
+		System.out.println("Avant Controller  ");
+		String serviceMethod = joinPoint.getSignature().getName();
+		System.out.println("joinPoint get Name : " + serviceMethod);
+		System.out.println("joinPoint get  Target: " + joinPoint.getTarget());
+		for (Object arg : joinPoint.getArgs()) {
+
+			System.out.println("joinPoint get Args : " + arg);
+		}
 
 	}
 

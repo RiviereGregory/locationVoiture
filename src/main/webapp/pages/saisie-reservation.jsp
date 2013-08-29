@@ -17,7 +17,7 @@
 </head>
 <body>
 	<!-- HEADER -->
-	<%@ include file="/pages/header.jsp"%>
+<%-- 	<%@ include file="/pages/header.jsp"%> --%>
 
 	<!-- **** -->
 
@@ -108,7 +108,7 @@
 		</tr>
 	</table>
 	<!-- FOOTER -->
-	<%@ include file="/pages/footer.jsp"%>
+<%-- 	<%@ include file="/pages/footer.jsp"%> --%>
 
 	<!-- **** -->
 </body>

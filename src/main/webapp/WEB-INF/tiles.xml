@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="index" template="/pages/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/pages/header.jsp" />
+		<put-attribute name="menu" value="/pages/index.jsp" />
+		<put-attribute name="body" value="/pages/body.jsp" />
+		<put-attribute name="footer" value="/pages/footer.jsp" />
+	</definition>
+
+	<!-- Permet d'ajouter les pages jsp dans le body grace à l'index -->
+	<definition name="list-reservation" extends="index">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/pages/list-reservation.jsp" />
+	</definition>
+	<definition name="list-client" extends="index">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/pages/list-client.jsp" />
+	</definition>
+	<definition name="list-voiture" extends="index">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/pages/list-voiture.jsp" />
+	</definition>
+	<definition name="saisie-reservation" extends="index">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/pages/saisie-reservation.jsp" />
+	</definition>
+	<definition name="saisie-client" extends="index">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/pages/saisie-client.jsp" />
+	</definition>
+	<definition name="saisie-voiture" extends="index">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="/pages/saisie-voiture.jsp" />
+	</definition>
+
+</tiles-definitions>

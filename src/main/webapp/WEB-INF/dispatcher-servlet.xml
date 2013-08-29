@@ -24,12 +24,30 @@
 	<mvc:annotation-driven />
 
 	<!-- pour utiliser l'affichage web -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/pages/" />
-		<property name="suffix" value=".jsp" />
+<!-- 	<bean id="viewResolver" -->
+<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<property name="viewClass" -->
+<!-- 			value="org.springframework.web.servlet.view.JstlView" /> -->
+<!-- 		<property name="prefix" value="/pages/" /> -->
+<!-- 		<property name="suffix" value=".jsp" /> -->
+<!-- 	</bean> -->
+
+	<!-- Pour utiliser Tiles -->
+	<bean id="viewResolverTiles"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass">
+			<value>
+				org.springframework.web.servlet.view.tiles2.TilesView
+			</value>
+		</property>
+	</bean>
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
 	</bean>
 
 	<!-- pour configurer la connection à la base de donnée -->
@@ -57,7 +75,13 @@
 	<!-- pour gerer les messages du hibernate validator dans un properties -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="messages" />
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>
+		<property name="fallbackToSystemLocale" value="false" />
+		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 
 	<!-- pour utiliser la langue que l'on veut utiliser en parametre de l'url -->
@@ -73,16 +97,22 @@
 		<property name="paramName" value="lang" />
 	</bean>
 
-	<bean id="handlerMapping"
-	    class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-	    <property name="interceptors">
-	        <ref bean="localeChangeInterceptorLogin" />
-	    </property>
-	</bean>
 	<!-- creer un cookie pour utiliser la langue -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="fr" />
+	</bean>
+
+	<!-- <bean id="localeResolverSession" -->
+	<!-- class="org.springframework.web.servlet.i18n.SessionLocaleResolver"> -->
+	<!-- <property name="defaultLocale" value="fr" /> -->
+	<!-- </bean> -->
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptorLogin" />
+		</property>
 	</bean>
 
 
