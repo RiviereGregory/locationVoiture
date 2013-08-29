@@ -161,6 +161,13 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
+		<!-- EasyMock -->
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.2</version>
+		</dependency>
+
 	</dependencies>
 
 
@@ -175,7 +182,7 @@
 			</activation>
 			<properties>
 				<!-- pour utiliser la clef dans le fichier log4j.xml on met la variable -->
-				<choix.conf.log4j>DEBUG</choix.conf.log4j>
+				<choix.conf.log4j>WARN</choix.conf.log4j>
 			</properties>
 		</profile>
 

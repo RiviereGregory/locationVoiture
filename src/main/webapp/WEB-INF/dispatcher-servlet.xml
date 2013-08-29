@@ -67,11 +67,24 @@
 			<property name="paramName" value="lang" />
 		</bean>
 	</mvc:interceptors>
+
+	<bean id="localeChangeInterceptorLogin"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="lang" />
+	</bean>
+
+	<bean id="handlerMapping"
+	    class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	    <property name="interceptors">
+	        <ref bean="localeChangeInterceptorLogin" />
+	    </property>
+	</bean>
 	<!-- creer un cookie pour utiliser la langue -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="fr" />
 	</bean>
+
 
 	<!-- pour utiliser la langue que l'on veut utiliser en parametre de l'url 
 		a la place de mvc:interceptor -->
@@ -157,11 +170,14 @@
 
 	<!-- Conf AOP -->
 	<aop:config>
-
-		<!-- Définition du point d'interception (toutes les méthodes save de toutes 
-			les classes des services) -->
+		<!-- Définition des points d'interception (toutes les méthodes save de 
+			toutes les classes des services) -->
 		<aop:pointcut id="notifierPointcut"
 			expression="execution(* fr.treeptik.locationvoiture.service.*.save(..))" />
+		<aop:pointcut id="logPointcut"
+			expression="execution(* fr.treeptik.locationvoiture.service.*.*(..))" />
+		<aop:pointcut id="controllerLogPointcut"
+			expression="execution(* fr.treeptik.locationvoiture.controller.*.*(..))" />
 
 		<!-- Appel des méthodes -->
 		<aop:aspect id="notifierAop" ref="notifierAspect">
@@ -169,20 +185,14 @@
 				method="afterReturning" returning="result" />
 			<aop:before method="beforeSave" pointcut-ref="notifierPointcut" />
 		</aop:aspect>
-
-	</aop:config>
-
-	<!-- Conf AOP -->
-	<aop:config>
-		<!-- Définition du point d'interception (toutes les méthodes save de toutes 
-			les classes des services) -->
-		<aop:pointcut id="logPointcut"
-			expression="execution(* fr.treeptik.locationvoiture.controller.*.*(..))" />
-		<!-- Appel des méthodes -->
 		<aop:aspect id="logAop" ref="logAspect">
 			<aop:after-returning pointcut-ref="logPointcut"
 				method="afterReturning" returning="result" />
+			<aop:before method="beforeSaveService" pointcut-ref="logPointcut" />
+			<aop:before method="beforeSaveController" pointcut-ref="controllerLogPointcut" />
 		</aop:aspect>
+
+
 	</aop:config>
 
 </beans>
