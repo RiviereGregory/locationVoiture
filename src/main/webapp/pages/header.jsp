@@ -10,7 +10,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <!-- pour utiliser le style css -->
 <style>
@@ -24,9 +24,12 @@
 	<p id="header">
 		<spring:message code="header.titre" />
 	</p>
-	<a href="/location-voiture/j_spring_security_logout"><spring:message 
-	code="bouton.deconnexion" /></a> <br /> <span style="float: right">
-		<a href="?lang=en">en <img border="0" src="images/en.gif" alt="en"
+	<a href="/location-voiture/j_spring_security_logout"><spring:message
+			code="bouton.deconnexion" /></a> <br />
+	<!-- 	on peut passer les parametres des resquest utilisé dans le controller -->
+	<spring:message code="header.bienvenue" /> : ${userName} 
+	<span style="float: right"> 
+	<a href="?lang=en">en <img border="0" src="images/en.gif" alt="en"
 			width="20" height="15"></a> | <a href="?lang=fr">fr <img
 			border="0" src="images/fr.gif" alt="fr" width="20" height="15"></a>
 	</span> <br /> <br />

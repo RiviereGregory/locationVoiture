@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -41,9 +42,12 @@ public class ClientController {
 	private Logger logger = Logger.getLogger(ClientController.class);
 
 	@RequestMapping(value = "/client.do", method = RequestMethod.GET)
-	public ModelAndView intiClient() {
-		// Affiche le log dans le niveau info
-		logger.info("Appel intiClient Methode GET");
+	public ModelAndView intiClient(HttpServletRequest request) {
+		// Affiche le log dans le niveau info et affiche le nom de l'utilisateur qui est connecté
+		// dans la session avec request.getSession().getAttribute("userName") que l'on a récupéré
+		// dans l'indexcotroller
+		logger.info("Appel intiClient Methode GET USER : "
+				+ request.getSession().getAttribute("userName"));
 		Client c = new Client();
 
 		ModelAndView modelAndView = new ModelAndView("saisie-client", "client", c);

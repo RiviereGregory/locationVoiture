@@ -178,7 +178,7 @@
 			<version>${tiles.version}</version>
 			<exclusions>
 				<exclusion>
-	<!-- il faut exclure cette version pour en mettre une autre -->
+					<!-- il faut exclure cette version pour en mettre une autre -->
 					<artifactId>jcl-over-slf4j</artifactId>
 					<groupId>org.slf4j</groupId>
 				</exclusion>
@@ -200,6 +200,13 @@
 			<version>${tiles.version}</version>
 		</dependency>
 
+		<!-- Servlet API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 
