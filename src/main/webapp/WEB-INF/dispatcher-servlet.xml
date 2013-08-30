@@ -24,15 +24,15 @@
 	<mvc:annotation-driven />
 
 	<!-- pour utiliser l'affichage web -->
-<!-- 	<bean id="viewResolver" -->
-<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-<!-- 		<property name="viewClass" -->
-<!-- 			value="org.springframework.web.servlet.view.JstlView" /> -->
-<!-- 		<property name="prefix" value="/pages/" /> -->
-<!-- 		<property name="suffix" value=".jsp" /> -->
-<!-- 	</bean> -->
+	<!-- <bean id="viewResolver" -->
+	<!-- class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+	<!-- <property name="viewClass" -->
+	<!-- value="org.springframework.web.servlet.view.JstlView" /> -->
+	<!-- <property name="prefix" value="/pages/" /> -->
+	<!-- <property name="suffix" value=".jsp" /> -->
+	<!-- </bean> -->
 
-	<!-- Pour utiliser Tiles -->
+	<!-- Pour utiliser Tiles a mettre a la place de celui du dessus (viewResolver) -->
 	<bean id="viewResolverTiles"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass">
@@ -45,6 +45,7 @@
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
 			<list>
+				<!-- liste des fichiers xml pour la config de tiles -->
 				<value>/WEB-INF/tiles.xml</value>
 			</list>
 		</property>
@@ -77,6 +78,8 @@
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
+				<!-- Liste des fichies contenant les messages pour l'externalisation 
+					des textes -->
 				<value>messages</value>
 			</list>
 		</property>
@@ -91,7 +94,7 @@
 			<property name="paramName" value="lang" />
 		</bean>
 	</mvc:interceptors>
-
+	<!-- la variable qui permet de modifier la lang ici qui est intercepté -->
 	<bean id="localeChangeInterceptorLogin"
 		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="lang" />
@@ -108,13 +111,13 @@
 	<!-- <property name="defaultLocale" value="fr" /> -->
 	<!-- </bean> -->
 
+	<!-- Autre façon d'intercepter -->
 	<bean id="handlerMapping"
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="interceptors">
 			<ref bean="localeChangeInterceptorLogin" />
 		</property>
 	</bean>
-
 
 	<!-- pour utiliser la langue que l'on veut utiliser en parametre de l'url 
 		a la place de mvc:interceptor -->
@@ -192,7 +195,7 @@
 	</security:authentication-manager>
 
 
-
+	<!-- Pour log4j -->
 	<!-- Bean qui contient le code qui serra exécuté cette conf peut être faite 
 		avec l'annotation @Component -->
 	<bean id="notifierAspect" class="fr.treeptik.locationvoiture.aspect.ConsoleNotifier" />
@@ -204,24 +207,32 @@
 			toutes les classes des services) -->
 		<aop:pointcut id="notifierPointcut"
 			expression="execution(* fr.treeptik.locationvoiture.service.*.save(..))" />
+		<!-- (toutes les méthodes de toutes les classes des services) -->
 		<aop:pointcut id="logPointcut"
 			expression="execution(* fr.treeptik.locationvoiture.service.*.*(..))" />
+		<!-- (toutes les méthodes de toutes les classes des controller) -->
 		<aop:pointcut id="controllerLogPointcut"
 			expression="execution(* fr.treeptik.locationvoiture.controller.*.*(..))" />
 
 		<!-- Appel des méthodes -->
+		<!-- on utilise la class notifierAspect et la methode afterReturning avec 
+			le point d'interception notifierPointcut -->
 		<aop:aspect id="notifierAop" ref="notifierAspect">
 			<aop:after-returning pointcut-ref="notifierPointcut"
 				method="afterReturning" returning="result" />
+			<!-- la methode beforeSave avec le point d'interception notifierPointcut -->
 			<aop:before method="beforeSave" pointcut-ref="notifierPointcut" />
 		</aop:aspect>
+		<!-- on utilise la class logAspect et la methode afterReturning avec le 
+			point d'interception logPointcut -->
 		<aop:aspect id="logAop" ref="logAspect">
 			<aop:after-returning pointcut-ref="logPointcut"
 				method="afterReturning" returning="result" />
+			<!-- la methode beforeSaveService avec le point d'interception logPointcut -->
 			<aop:before method="beforeSaveService" pointcut-ref="logPointcut" />
+			<!-- la methode beforeSaveController avec le point d'interception controllerLogPointcut -->
 			<aop:before method="beforeSaveController" pointcut-ref="controllerLogPointcut" />
 		</aop:aspect>
-
 
 	</aop:config>
 
