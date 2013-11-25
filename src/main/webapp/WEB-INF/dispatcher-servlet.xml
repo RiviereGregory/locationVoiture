@@ -56,7 +56,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/locationvoiture" />
 		<property name="username" value="root" />
-		<property name="password" value="root" />
+		<property name="password" value="" />
 	</bean>
 	<!-- Pour utiliser hibernate avec spring -->
 	<bean id="entityManagerFactory"
@@ -226,8 +226,8 @@
 		<!-- on utilise la class logAspect et la methode afterReturning avec le 
 			point d'interception logPointcut -->
 		<aop:aspect id="logAop" ref="logAspect">
-			<aop:after-returning pointcut-ref="logPointcut"
-				method="afterReturning" returning="result" />
+<!-- 			<aop:after-returning pointcut-ref="logPointcut" -->
+<!-- 				method="afterReturning" returning="result" /> -->
 			<!-- la methode beforeSaveService avec le point d'interception logPointcut -->
 			<aop:before method="beforeSaveService" pointcut-ref="logPointcut" />
 			<!-- la methode beforeSaveController avec le point d'interception controllerLogPointcut -->
